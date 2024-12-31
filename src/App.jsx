@@ -454,7 +454,7 @@ function App() {
 
                 {/* List Item 3 */}
                 <div
-                  className="items-center w-1/2 md:w-1/4 mb-6 shadow-2xl border-solid border-4 border-yellow-300 rounded-lg"
+                  className="items-center w-1/2 md:w-1/4 mb-6 shadow-2xl border-solid border-4 border-yellow-300 rounded-lg bg-yellow-300"
                   style={{ width: "30%" }}
                 >
                   <div className="px-5 py-5">
