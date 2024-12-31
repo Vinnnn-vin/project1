@@ -66,7 +66,24 @@ function App() {
 
   const pricingData = [
     {
-      title: "Paket 1",
+      title: "Bronze Package",
+      price: "4.000.000",
+      features: [
+        "15 Photos Feed Instagram",
+        "8 Design Feeds Instagram",
+        "12 Story Instagram",
+        "2 Reels",
+        "Strategi & Perencanaan (analisa + konsep & ide + monthly report & evaluasi)",
+        "Scriptwriting",
+        "Copywriting Instagram",
+        "Admin Instagram (reply dm, comment, upload video)",
+        "Instagram Ads",
+        "Photographer & Editor",
+        "Visit 1-2x sebulan",
+      ],
+    },
+    {
+      title: "Silver Package",
       price: "5.000.000",
       features: [
         "12 Konten Tiktok Mirroring ke reels",
@@ -80,7 +97,7 @@ function App() {
       ],
     },
     {
-      title: "Paket 2",
+      title: "Gold Package",
       price: "7.000.000",
       features: [
         "15 Konten Tiktok Mirroring ke Reels",
@@ -93,23 +110,6 @@ function App() {
         "Admin Tiktok & Instagram (reply dm, comment, upload video)",
         "Tiktok Ads",
         "Videographer & Editor",
-        "Visit 1-2x sebulan",
-      ],
-    },
-    {
-      title: "Paket 3",
-      price: "4.000.000",
-      features: [
-        "15 Photos Feed Instagram",
-        "8 Design Feeds Instagram",
-        "12 Story Instagram",
-        "2 Reels",
-        "Strategi & Perencanaan (analisa + konsep & ide + monthly report & evaluasi)",
-        "Scriptwriting",
-        "Copywriting Instagram",
-        "Admin Instagram (reply dm, comment, upload video)",
-        "Instagram Ads",
-        "Photographer & Editor",
         "Visit 1-2x sebulan",
       ],
     },
@@ -135,9 +135,21 @@ function App() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const images = [
-    { id: 1, src: "/images/galery/IMG-20241011-WA0010.jpg", alt: "Gallery Image 1" },
-    { id: 2, src: "/images/galery/IMG-20241011-WA0013.jpg", alt: "Gallery Image 2" },
-    { id: 3, src: "/images/gallery/img3.jpg", alt: "Gallery Image 3" },
+    {
+      id: 1,
+      src: "/images/galery/IMG-20241011-WA0010.jpg",
+      alt: "Gallery Image 1",
+    },
+    {
+      id: 2,
+      src: "/images/galery/IMG-20241011-WA0013.jpg",
+      alt: "Gallery Image 2",
+    },
+    {
+      id: 3,
+      src: "/images/galery/IMG-20241011-WA0016.jpg",
+      alt: "Gallery Image 3",
+    },
     { id: 4, src: "/images/gallery/img4.jpg", alt: "Gallery Image 4" },
     { id: 5, src: "/images/gallery/img5.jpg", alt: "Gallery Image 5" },
     { id: 6, src: "/images/gallery/img6.jpg", alt: "Gallery Image 6" },
@@ -224,10 +236,12 @@ function App() {
     <div className="text-white flex flex-col">
       {/* Navbar */}
       <nav
-        className="w-full flex justify-between items-center bg-black sticky top-0 z-10"
+        className="w-full flex justify-between items-center bg-black top-0 z-10"
         style={{ padding: "30px 80px" }}
       >
-        <div className="text-2xl font-bold">KOSI</div>
+        <div className="font-bold">
+          <img src="images/KOSI Square White 2.png" style={{ width: 50 }} />
+        </div>
         <ul className="flex space-x-6">
           {sections.map((section, idx) => (
             <li key={section}>
@@ -418,11 +432,11 @@ function App() {
               <div className="w-full flex flex-wrap justify-center gap-6 pt-6">
                 {/* List Item 1 */}
                 <div
-                  className="items-center md:w-1/4 mb-6 shadow-2xl border-solid border-4 border-yellow-300 rounded-lg"
+                  className="items-center md:w-1/4 mb-6 shadow-2xl border-solid border-4 border-yellow-300 rounded-lg bg-yellow-300"
                   style={{ width: "30%" }}
                 >
                   <div className="px-5 py-5">
-                    <h2 className="font-bold text-lg text-black">
+                    <h2 className="font-bold text-lg text-black pb-3">
                       Kemajuan Teknologi dan Digitalisasi
                     </h2>
                     <p className="text-gray-600">
@@ -436,11 +450,11 @@ function App() {
 
                 {/* List Item 2 */}
                 <div
-                  className="items-center w-1/2 md:w-1/4 mb-6 shadow-2xl border-solid border-4 border-yellow-300 rounded-lg"
+                  className="items-center w-1/2 md:w-1/4 mb-6 shadow-2xl border-solid border-4 border-yellow-300 rounded-lg bg-yellow-300"
                   style={{ width: "30%" }}
                 >
                   <div className="px-5 py-5">
-                    <h2 className="font-bold text-lg text-black">
+                    <h2 className="font-bold text-lg text-black pb-3">
                       Akses ke Pasar Global
                     </h2>
                     <p className="text-gray-600">
@@ -454,11 +468,11 @@ function App() {
 
                 {/* List Item 3 */}
                 <div
-                  className="items-center w-1/2 md:w-1/4 mb-6 shadow-2xl border-solid border-4 border-yellow-300 rounded-lg"
+                  className="items-center w-1/2 md:w-1/4 mb-6 shadow-2xl border-solid border-4 border-yellow-300 rounded-lg bg-yellow-300"
                   style={{ width: "30%" }}
                 >
                   <div className="px-5 py-5">
-                    <h2 className="font-bold text-lg text-black">
+                    <h2 className="font-bold text-lg text-black pb-3">
                       Inovasi dalam Pembiayaan Bisnis
                     </h2>
                     <p className="text-gray-600">
@@ -575,7 +589,7 @@ function App() {
             {/* Previous Button */}
             <button
               onClick={prevSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 bg-white/10 hover:bg-white/20 rounded-full p-2 z-10"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 bg-white/10 hover:bg-white/20 rounded-full p-2"
             >
               {/* <ChevronLeft size={24} /> */}
               <p> kiri </p>
@@ -608,7 +622,7 @@ function App() {
             {/* Next Button */}
             <button
               onClick={nextSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 bg-white/10 hover:bg-white/20 rounded-full p-2 z-10"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 bg-white/10 hover:bg-white/20 rounded-full p-2"
             >
               {/* <ChevronRight size={24} /> */}
               <p>kanan</p>
@@ -619,6 +633,9 @@ function App() {
 
       {/* Pricing Sections */}
       <div id="pricing" className="w-full py-16 bg-gray-100">
+        <div className="text-black text-center pb-10 text-2xl">
+          <b><h2>Package</h2></b>
+        </div>
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
           {pricingData.map((pack, index) => (
             <div
@@ -633,11 +650,13 @@ function App() {
 
               <div className="p-6 bg-[#F5F5DC] flex-grow flex flex-col">
                 <div className="text-center mb-6">
-                  <span className="text-sm">Rp</span>
+                  <span className="text-sm text-black">
+                    <b>Rp</b>
+                  </span>
                   <span className="text-4xl font-bold text-gray-800">
                     {pack.price}
                   </span>
-                  <span className="text-sm text-gray-600 ml-1">Monthly</span>
+                  <span className="text-sm text-gray-600 ml-1">/ Bulan</span>
                 </div>
 
                 <ul className="space-y-4 flex-grow">
@@ -662,7 +681,7 @@ function App() {
       </div>
 
       {/* Gallery Section */}
-      <div className="bg-white py-24">
+      <div className="bg-white py-24" id="gallery">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12">Our Gallery</h2>
 
