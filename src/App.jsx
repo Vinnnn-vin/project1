@@ -92,6 +92,41 @@ function App() {
       image: "/images/luke-chesser-1uxV8fAfhVM-unsplash.jpg",
       alt: "Social Media Post",
     },
+    {
+      id: 6,
+      image: "/images/luke-chesser-1uxV8fAfhVM-unsplash.jpg",
+      alt: "Social Media Post",
+    },
+    {
+      id: 7,
+      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
+      alt: "Thang Palace Logo",
+    },
+    {
+      id: 8,
+      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
+      alt: "Cartoon Avatar",
+    },
+    {
+      id: 9,
+      image: "/images/luke-chesser-1uxV8fAfhVM-unsplash.jpg",
+      alt: "Social Media Post",
+    },
+    {
+      id: 10,
+      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
+      alt: "Thang Palace Logo",
+    },
+    {
+      id: 11,
+      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
+      alt: "Cartoon Avatar",
+    },
+    {
+      id: 12,
+      image: "/images/luke-chesser-1uxV8fAfhVM-unsplash.jpg",
+      alt: "Social Media Post",
+    },
   ];
 
   const pricingData = [
@@ -227,7 +262,7 @@ function App() {
   useEffect(() => {
     const timer = setInterval(() => {
       nextSlide();
-    }, 2000);
+    }, 5000);
 
     return () => clearInterval(timer);
   }, []);
@@ -284,12 +319,13 @@ function App() {
   return (
     <div className="text-white flex flex-col">
       {/* Navbar */}
-      <nav
-        className="w-full flex justify-between items-center bg-black top-0 z-10"
-        style={{ padding: "30px 80px" }}
-      >
-        <div className="font-bold">
-          <img src="images/KOSI Square White 2.png" style={{ width: 50 }} />
+      <nav className="w-full flex justify-between items-center bg-black top-0 z-10 px-20 py-6">
+        <div className="flex items-center">
+          <img
+            src="images/KOSI Square White 2.png"
+            alt="KOSI Logo"
+            className="h-12 w-auto object-contain"
+          />
         </div>
         <ul className="flex space-x-6">
           {sections.map((section, idx) => (
@@ -625,43 +661,35 @@ function App() {
       </div>
 
       {/* Client Section */}
-      <div
-        id="about"
-        className="w-full min-h-screen bg-black flex flex-col justify-center py-16"
-      >
+      <div id="about" className="w-full min-h-screen bg-black flex flex-col justify-center py-16">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-16 text-white">
             Project Client Kami
           </h2>
 
-          <div className="relative">
+          <div className="relative flex justify-center">
             <button
               onClick={prevSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-20 bg-white/10 hover:bg-white/20 rounded-full p-4 text-white transition-all duration-300 hover:scale-110"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-20 bg-white/10 hover:bg-white/20 rounded-full p-4 text-white transition-all duration-300 hover:scale-110 z-10"
               disabled={isAnimating}
             >
               <ChevronLeft size={24} />
             </button>
 
-            <div className="overflow-hidden">
+            <div className="overflow-hidden w-[650px]"> {/* Fixed width container */}
               <div
-                className={`grid grid-cols-3 grid-rows-2 gap-8 transition-opacity duration-500 ${
+                className={`grid grid-cols-3 grid-rows-2 transition-opacity duration-500 ${
                   isAnimating ? "opacity-0" : "opacity-100"
                 }`}
               >
                 {getCurrentSlideProjects().map((project) => (
-                  <div key={project.id} className="aspect-video relative group">
-                    <div className="bg-white rounded-lg overflow-hidden h-full transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-2xl">
+                  <div key={project.id} className="aspect-square relative group flex justify-center items-center">
+                    <div className="w-48 h-48 bg-white rounded-lg overflow-hidden transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-2xl">
                       <img
                         src={project.image}
                         alt={project.alt}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                        <span className="text-white text-lg font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                          View Project
-                        </span>
-                      </div>
                     </div>
                   </div>
                 ))}
@@ -675,26 +703,26 @@ function App() {
             >
               <ChevronRight size={24} />
             </button>
+          </div>
 
-            <div className="flex justify-center mt-8 gap-2">
-              {Array.from({ length: totalSlides }).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    if (!isAnimating) {
-                      setIsAnimating(true);
-                      setCurrentSlide(index);
-                      setTimeout(() => setIsAnimating(false), 500);
-                    }
-                  }}
-                  className={`h-2 rounded-full transition-all duration-500 ${
-                    currentSlide === index
-                      ? "w-8 bg-white"
-                      : "w-2 bg-gray-500 hover:bg-gray-300"
-                  }`}
-                />
-              ))}
-            </div>
+          <div className="flex justify-center mt-8 gap-2">
+            {Array.from({ length: totalSlides }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  if (!isAnimating) {
+                    setIsAnimating(true);
+                    setCurrentSlide(index);
+                    setTimeout(() => setIsAnimating(false), 500);
+                  }
+                }}
+                className={`h-2 rounded-full transition-all duration-500 ${
+                  currentSlide === index
+                    ? "w-8 bg-white"
+                    : "w-2 bg-gray-500 hover:bg-gray-300"
+                }`}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -742,9 +770,7 @@ function App() {
                 </ul>
 
                 <button className="w-full bg-green-500 text-white py-3 rounded-lg mt-8 hover:bg-green-600 transition-colors">
-                  <a href="http://tiny.cc/adminkosi">
-                    Pesan Sekarang
-                  </a>
+                  <a href="http://tiny.cc/adminkosi">Pesan Sekarang</a>
                 </button>
               </div>
             </div>
@@ -830,11 +856,11 @@ function App() {
       <footer className="bg-yellow-400 px-8 py-12">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Logo and Contact */}
-          <div>
+          <div className="flex flex-col">
             <img
-              src="images/KOSI Square  Black 2.png"
+              src="images/KOSI Square Black 2.png"
               alt="KOSI"
-              className="h-12 mb-4"
+              className="h-16 w-auto object-contain mb-6"
             />
             <p className="mb-2">Jawa Timur, Surabaya, Indonesia</p>
             <p>+6285772753431</p>
