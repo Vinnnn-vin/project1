@@ -137,7 +137,7 @@ function App() {
   const images = [
     { id: 1, src: "/images/galery/IMG-20241011-WA0010.jpg", alt: "Gallery Image 1" },
     { id: 2, src: "/images/galery/IMG-20241011-WA0013.jpg", alt: "Gallery Image 2" },
-    { id: 3, src: "/images/gallery/img3.jpg", alt: "Gallery Image 3" },
+    { id: 3, src: "/images/galery/IMG-20241011-WA0016.jpg", alt: "Gallery Image 3" },
     { id: 4, src: "/images/gallery/img4.jpg", alt: "Gallery Image 4" },
     { id: 5, src: "/images/gallery/img5.jpg", alt: "Gallery Image 5" },
     { id: 6, src: "/images/gallery/img6.jpg", alt: "Gallery Image 6" },
@@ -227,7 +227,7 @@ function App() {
         className="w-full flex justify-between items-center bg-black sticky top-0 z-10"
         style={{ padding: "30px 80px" }}
       >
-        <div className="text-2xl font-bold">KOSI</div>
+        <div className="font-bold"><img src="images/KOSI Square White 2.png" style={{width:50}}/></div>
         <ul className="flex space-x-6">
           {sections.map((section, idx) => (
             <li key={section}>
@@ -418,8 +418,8 @@ function App() {
               <div className="w-full flex flex-wrap justify-center gap-6 pt-6">
                 {/* List Item 1 */}
                 <div
-                  className="items-center md:w-1/4 mb-6 shadow-2xl border-solid border-4 border-yellow-300 rounded-lg"
-                  style={{ width: "30%" }}
+                  className="items-center md:w-1/4 mb-6 shadow-2xl border-solid border-4 border-yellow-300 rounded-lg bg-yellow-300"
+                  style={{ width: "30%"}}
                 >
                   <div className="px-5 py-5">
                     <h2 className="font-bold text-lg text-black">
@@ -436,7 +436,7 @@ function App() {
 
                 {/* List Item 2 */}
                 <div
-                  className="items-center w-1/2 md:w-1/4 mb-6 shadow-2xl border-solid border-4 border-yellow-300 rounded-lg"
+                  className="items-center w-1/2 md:w-1/4 mb-6 shadow-2xl border-solid border-4 border-yellow-300 rounded-lg bg-yellow-300"
                   style={{ width: "30%" }}
                 >
                   <div className="px-5 py-5">
