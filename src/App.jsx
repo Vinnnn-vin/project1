@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 function App() {
   const [activeSection, setActiveSection] = useState("");
@@ -61,7 +62,36 @@ function App() {
       image: "/images/luke-chesser-1uxV8fAfhVM-unsplash.jpg",
       alt: "Social Media Post",
     },
-    // Add more projects as needed
+    {
+      id: 7,
+      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
+      alt: "Thang Palace Logo",
+    },
+    {
+      id: 8,
+      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
+      alt: "Cartoon Avatar",
+    },
+    {
+      id: 9,
+      image: "/images/luke-chesser-1uxV8fAfhVM-unsplash.jpg",
+      alt: "Social Media Post",
+    },
+    {
+      id: 10,
+      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
+      alt: "Thang Palace Logo",
+    },
+    {
+      id: 11,
+      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
+      alt: "Cartoon Avatar",
+    },
+    {
+      id: 12,
+      image: "/images/luke-chesser-1uxV8fAfhVM-unsplash.jpg",
+      alt: "Social Media Post",
+    },
   ];
 
   const pricingData = [
@@ -174,18 +204,37 @@ function App() {
   };
 
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slidesToShow = 3; // Number of slides to show at once
+  const [isAnimating, setIsAnimating] = useState(false);
+  const itemsPerSlide = 6;
+  const totalSlides = Math.ceil(clientProjects.length / itemsPerSlide);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === clientProjects.length - slidesToShow ? 0 : prev + 1
-    );
+    if (!isAnimating) {
+      setIsAnimating(true);
+      setCurrentSlide((prev) => (prev + 1) % totalSlides);
+      setTimeout(() => setIsAnimating(false), 500);
+    }
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === 0 ? clientProjects.length - slidesToShow : prev - 1
-    );
+    if (!isAnimating) {
+      setIsAnimating(true);
+      setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+      setTimeout(() => setIsAnimating(false), 500);
+    }
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 2000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const getCurrentSlideProjects = () => {
+    const startIndex = currentSlide * itemsPerSlide;
+    return clientProjects.slice(startIndex, startIndex + itemsPerSlide);
   };
 
   const scrollToSection = (id) => {
@@ -280,7 +329,9 @@ function App() {
               With Social Media
             </h1>
             <button className="bg-green-500 text-black px-6 py-2 rounded font-bold hover:bg-green-600 rounded-lg">
-              Konsultasi Gratis Sekarang
+              <a href="https://api.whatsapp.com/send/?phone=62881037767536&text&type=phone_number&app_absent=0wa.me/+62881037767536">
+                Konsultasi Gratis Sekarang
+              </a>
             </button>
           </div>
 
@@ -576,57 +627,74 @@ function App() {
       {/* Client Section */}
       <div
         id="about"
-        className="w-full h-screen flex flex-col justify-center"
-        style={{ backgroundColor: "black" }}
+        className="w-full min-h-screen bg-black flex flex-col justify-center py-16"
       >
-        <div className="max-w-7xl mx-auto w-full">
-          <h2 className="text-4xl font-bold text-center mb-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-16 text-white">
             Project Client Kami
           </h2>
 
-          {/* Carousel Container */}
           <div className="relative">
-            {/* Previous Button */}
             <button
               onClick={prevSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 bg-white/10 hover:bg-white/20 rounded-full p-2"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-20 bg-white/10 hover:bg-white/20 rounded-full p-4 text-white transition-all duration-300 hover:scale-110"
+              disabled={isAnimating}
             >
-              {/* <ChevronLeft size={24} /> */}
-              <p> kiri </p>
+              <ChevronLeft size={24} />
             </button>
 
-            {/* Carousel */}
             <div className="overflow-hidden">
               <div
-                className="flex transition-transform duration-500 ease-in-out"
-                style={{
-                  transform: `translateX(-${
-                    currentSlide * (100 / slidesToShow)
-                  }%)`,
-                }}
+                className={`grid grid-cols-3 grid-rows-2 gap-8 transition-opacity duration-500 ${
+                  isAnimating ? "opacity-0" : "opacity-100"
+                }`}
               >
-                {clientProjects.map((project) => (
-                  <div key={project.id} className="w-full min-w-[33.333%] px-4">
-                    <div className="bg-white rounded-lg aspect-square overflow-hidden">
+                {getCurrentSlideProjects().map((project) => (
+                  <div key={project.id} className="aspect-video relative group">
+                    <div className="bg-white rounded-lg overflow-hidden h-full transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-2xl">
                       <img
                         src={project.image}
                         alt={project.alt}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <span className="text-white text-lg font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                          View Project
+                        </span>
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Next Button */}
             <button
               onClick={nextSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 bg-white/10 hover:bg-white/20 rounded-full p-2"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-20 bg-white/10 hover:bg-white/20 rounded-full p-4 text-white z-10 transition-all duration-300 hover:scale-110"
+              disabled={isAnimating}
             >
-              {/* <ChevronRight size={24} /> */}
-              <p>kanan</p>
+              <ChevronRight size={24} />
             </button>
+
+            <div className="flex justify-center mt-8 gap-2">
+              {Array.from({ length: totalSlides }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    if (!isAnimating) {
+                      setIsAnimating(true);
+                      setCurrentSlide(index);
+                      setTimeout(() => setIsAnimating(false), 500);
+                    }
+                  }}
+                  className={`h-2 rounded-full transition-all duration-500 ${
+                    currentSlide === index
+                      ? "w-8 bg-white"
+                      : "w-2 bg-gray-500 hover:bg-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -634,7 +702,9 @@ function App() {
       {/* Pricing Sections */}
       <div id="pricing" className="w-full py-16 bg-gray-100">
         <div className="text-black text-center pb-10 text-2xl">
-          <b><h2>Package</h2></b>
+          <b>
+            <h2>Layanan Kami</h2>
+          </b>
         </div>
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
           {pricingData.map((pack, index) => (
@@ -672,7 +742,9 @@ function App() {
                 </ul>
 
                 <button className="w-full bg-green-500 text-white py-3 rounded-lg mt-8 hover:bg-green-600 transition-colors">
-                  Pesan Sekarang
+                  <a href="http://tiny.cc/adminkosi">
+                    Pesan Sekarang
+                  </a>
                 </button>
               </div>
             </div>
@@ -759,7 +831,11 @@ function App() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Logo and Contact */}
           <div>
-            <img src="/path/to/kosi-logo.png" alt="KOSI" className="h-8 mb-4" />
+            <img
+              src="images/KOSI Square  Black 2.png"
+              alt="KOSI"
+              className="h-12 mb-4"
+            />
             <p className="mb-2">Jawa Timur, Surabaya, Indonesia</p>
             <p>+6285772753431</p>
           </div>
