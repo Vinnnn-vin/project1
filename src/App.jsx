@@ -308,6 +308,7 @@ function App() {
         "Photographer & Editor",
         "Visit 1-2x sebulan",
       ],
+      isTopSeller: true
     },
     {
       title: "Silver Package",
@@ -763,8 +764,15 @@ function App() {
           {pricingData.map((pack, index) => (
             <div
               key={index}
-              className="bg-white rounded-t-2xl overflow-hidden shadow-lg flex flex-col h-full"
+              className="relative bg-white rounded-t-2xl overflow-hidden shadow-lg flex flex-col h-full"
             >
+              {/* Badge for Top Seller */}
+              {pack.isTopSeller && (
+                <div className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold py-1 px-3 rounded-bl-lg">
+                  Top Seller
+                </div>
+              )}
+
               <div className="bg-yellow-400 py-4">
                 <h3 className="text-xl font-bold text-center text-black">
                   {pack.title}
