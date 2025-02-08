@@ -1,18 +1,34 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 function App() {
   const [activeSection, setActiveSection] = useState("");
 
+  /* Navbar */
   const sections = ["contents", "services", "about", "gallery"];
   const sectionNames = [
     "All Contents & Event",
     "Services",
     "About KOSI",
     "Gallery KOSI",
-  ]; // Nama tampilan baru
+  ];
+  const scrollToSection = (id) => {
+    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+  };
 
+  /* All Content - Event */
+  const title = "Percayakan Perkembangan Masa Depan Bisnis Anda Bersama Kami";
+  const dataItems = [
+    { title: "Analisis Pasar", value: 100 },
+    { title: "Strategi Bisnis", value: 200 },
+    { title: "Pengelolaan Keuangan", value: 300 },
+    { title: "Optimasi Digital", value: 400 },
+    { title: "Pengembangan Produk", value: 500 },
+    { title: "Kepuasan Pelanggan", value: 600 },
+  ];
+
+  /* Services */
   const services = [
     {
       title: "KEAHLIAN DAN PENGALAMAN",
@@ -31,104 +47,250 @@ function App() {
     },
   ];
 
-  const clientProjects = [
+  /* Why Kosi Icon */
+  const socialIcons = [
     {
-      id: 1,
-      image: "/images/jose-aljovin-XevnZB3CdsU-unsplash.jpg",
-      alt: "Thang Palace Logo",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512"
+          className="w-8 h-8"
+        >
+          <path
+            fill=""
+            d="M448 209.9a210.1 210.1 0 0 1-122.8-39.3v178.8A162.6 162.6 0 1 1 185 188.3v89.9a74.6 74.6 0 1 0 52.2 71.2V0h88a121.2 121.2 0 0 0 1.9 22.2 122.2 122.2 0 0 0 53.9 80.2 121.2 121.2 0 0 0 67 20.7z"
+          />
+        </svg>
+      ),
+      name: "TikTok",
     },
     {
-      id: 2,
-      image: "/images/jose-aljovin-XevnZB3CdsU-unsplash.jpg",
-      alt: "Cartoon Avatar",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512"
+          className="w-8 h-8"
+        >
+          <path
+            fill=""
+            d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+          />
+        </svg>
+      ),
+      name: "Instagram",
     },
     {
-      id: 3,
-      image: "/images/jose-aljovin-XevnZB3CdsU-unsplash.jpg",
-      alt: "Social Media Post",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+          className="w-8 h-8"
+        >
+          <path
+            fill=""
+            d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
+          />
+        </svg>
+      ),
+      name: "Twitter",
     },
     {
-      id: 4,
-      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
-      alt: "Thang Palace Logo",
-    },
-    {
-      id: 5,
-      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
-      alt: "Cartoon Avatar",
-    },
-    {
-      id: 6,
-      image: "/images/luke-chesser-1uxV8fAfhVM-unsplash.jpg",
-      alt: "Social Media Post",
-    },
-    {
-      id: 7,
-      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
-      alt: "Thang Palace Logo",
-    },
-    {
-      id: 8,
-      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
-      alt: "Cartoon Avatar",
-    },
-    {
-      id: 9,
-      image: "/images/luke-chesser-1uxV8fAfhVM-unsplash.jpg",
-      alt: "Social Media Post",
-    },
-    {
-      id: 10,
-      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
-      alt: "Thang Palace Logo",
-    },
-    {
-      id: 11,
-      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
-      alt: "Cartoon Avatar",
-    },
-    {
-      id: 12,
-      image: "/images/luke-chesser-1uxV8fAfhVM-unsplash.jpg",
-      alt: "Social Media Post",
-    },
-    {
-      id: 6,
-      image: "/images/luke-chesser-1uxV8fAfhVM-unsplash.jpg",
-      alt: "Social Media Post",
-    },
-    {
-      id: 7,
-      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
-      alt: "Thang Palace Logo",
-    },
-    {
-      id: 8,
-      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
-      alt: "Cartoon Avatar",
-    },
-    {
-      id: 9,
-      image: "/images/luke-chesser-1uxV8fAfhVM-unsplash.jpg",
-      alt: "Social Media Post",
-    },
-    {
-      id: 10,
-      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
-      alt: "Thang Palace Logo",
-    },
-    {
-      id: 11,
-      image: "/images/ian-schneider-TamMbr4okv4-unsplash.jpg",
-      alt: "Cartoon Avatar",
-    },
-    {
-      id: 12,
-      image: "/images/luke-chesser-1uxV8fAfhVM-unsplash.jpg",
-      alt: "Social Media Post",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512"
+          className="w-8 h-8"
+        >
+          <path
+            fill=""
+            d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+          />
+        </svg>
+      ),
+      name: "WhatsApp",
     },
   ];
 
+  /* Project client Kami (List Client) */
+  const row1 = [
+    {
+      id: 1,
+      image: "/public/images/logo client/bonami.png",
+      alt: "Bon Ami",
+      description: "EONS Skin Clinic - Beauty & Healthcare",
+    },
+    {
+      id: 2,
+      image: "/public/images/logo client/Pertamina_Logo.svg.png",
+      alt: "Pertamina",
+    },
+    {
+      id: 3,
+      image: "public/images/logo client/ropopang-removebg-preview.png",
+      alt: "Ropopang",
+    },
+    {
+      id: 4,
+      image: "public/images/logo client/images-removebg-preview.png",
+      alt: "Saos Raja Rasa",
+    },
+    {
+      id: 5,
+      image: "public/images/logo client/sate_merapi-removebg-preview.png",
+      alt: "Sate Merapi",
+    },
+    {
+      id: 6,
+      image: "public/images/logo client/tang_kitchen-removebg-preview.png",
+      alt: "Tang Kitchen",
+    },
+    {
+      id: 7,
+      image: "public/images/logo client/Terbaiktronics.jpg",
+      alt: "Terbaik Tronics",
+    },
+    {
+      id: 8,
+      image:
+        "public/images/logo client/WhatsApp_Image_2024-12-31_at_10.14.56__1_-removebg-preview.png",
+      alt: "SCBD",
+    },
+    {
+      id: 9,
+      image:
+        "public/images/logo client/WhatsApp_Image_2024-12-31_at_10.14.56__2_-removebg-preview.png",
+      alt: "Branded Plus",
+    },
+    {
+      id: 10,
+      image:
+        "public/images/logo client/WhatsApp_Image_2024-12-31_at_10.14.57__1_-removebg-preview.png",
+      alt: "Dokter?",
+    },
+  ];
+
+  const row2 = [
+    { id: 11, image: "/public/images/logo client/bonami.png", alt: "Bon Ami" },
+    {
+      id: 12,
+      image: "/public/images/logo client/Pertamina_Logo.svg.png",
+      alt: "Pertamina",
+    },
+    {
+      id: 13,
+      image: "public/images/logo client/ropopang-removebg-preview.png",
+      alt: "Ropopang",
+    },
+    {
+      id: 14,
+      image: "public/images/logo client/images-removebg-preview.png",
+      alt: "Saos Raja Rasa",
+    },
+    {
+      id: 15,
+      image: "public/images/logo client/sate_merapi-removebg-preview.png",
+      alt: "Sate Merapi",
+    },
+    {
+      id: 16,
+      image: "public/images/logo client/tang_kitchen-removebg-preview.png",
+      alt: "Tang Kitchen",
+    },
+    {
+      id: 17,
+      image: "public/images/logo client/Terbaiktronics.jpg",
+      alt: "Terbaik Tronics",
+    },
+    {
+      id: 18,
+      image:
+        "public/images/logo client/WhatsApp_Image_2024-12-31_at_10.14.56__1_-removebg-preview.png",
+      alt: "SCBD",
+    },
+    {
+      id: 19,
+      image:
+        "public/images/logo client/WhatsApp_Image_2024-12-31_at_10.14.56__2_-removebg-preview.png",
+      alt: "Branded Plus",
+    },
+    {
+      id: 20,
+      image:
+        "public/images/logo client/WhatsApp_Image_2024-12-31_at_10.14.57__1_-removebg-preview.png",
+      alt: "Dokter?",
+    },
+  ];
+
+  const [position1, setPosition1] = useState(0);
+  const [position2, setPosition2] = useState(0);
+  const [selectedClient, setSelectedClient] = useState(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPosition1((prev) => {
+        const newPos = prev - 1;
+        return Math.abs(newPos) >= row1.length * 200 ? 0 : newPos;
+      });
+
+      setPosition2((prev) => {
+        const newPos = prev - 1;
+        return Math.abs(newPos) >= row2.length * 200 ? 0 : newPos;
+      });
+    }, 20);
+    return () => clearInterval(interval);
+  }, []);
+
+  const Modal = ({ client, onClose }) => (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg p-8 max-w-2xl w-full mx-4 relative">
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
+        >
+          <X size={24} />
+        </button>
+        <div className="flex flex-col items-center">
+          <div className="w-64 h-64 flex items-center justify-center mb-6">
+            <img
+              src={client.image}
+              alt={client.alt}
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+          <h3 className="text-2xl font-bold mb-4">{client.alt}</h3>
+          <p className="text-gray-600 text-center">{client.description}</p>
+        </div>
+      </div>
+    </div>
+  );
+
+  const CarouselRow = ({ items, position }) => (
+    <div className="overflow-hidden">
+      <div
+        className="flex gap-8 transition-transform duration-300"
+        style={{
+          transform: `translateX(${position}px)`,
+          width: "fit-content",
+        }}
+      >
+        {[...items, ...items].map((client, index) => (
+          <div
+            key={`${client.id}-${index}`}
+            onClick={() => setSelectedClient(client)}
+            className="w-40 h-40 rounded-lg overflow-hidden flex items-center justify-center p-4 cursor-pointer group"
+          >
+            <img
+              src={client.image}
+              alt={client.alt}
+              className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  /* Pricing List */
   const pricingData = [
     {
       title: "Bronze Package",
@@ -197,33 +359,36 @@ function App() {
     },
   ];
 
+  /* Galery Kosi */
   const [selectedImage, setSelectedImage] = useState(null);
 
   const images = [
     {
       id: 1,
-      src: "/images/galery/IMG-20241011-WA0010.jpg",
+      src: "/images/galery/img1.jpg",
       alt: "Gallery Image 1",
     },
     {
       id: 2,
-      src: "/images/galery/IMG-20241011-WA0013.jpg",
+      src: "/images/galery/img2.jpg",
       alt: "Gallery Image 2",
     },
     {
       id: 3,
-      src: "/images/galery/IMG-20241011-WA0016.jpg",
+      src: "/images/galery/img3.jpg",
       alt: "Gallery Image 3",
     },
-    { id: 4, src: "/images/gallery/img4.jpg", alt: "Gallery Image 4" },
-    { id: 5, src: "/images/gallery/img5.jpg", alt: "Gallery Image 5" },
-    { id: 6, src: "/images/gallery/img6.jpg", alt: "Gallery Image 6" },
-    { id: 7, src: "/images/gallery/img7.jpg", alt: "Gallery Image 7" },
-    { id: 8, src: "/images/gallery/img8.jpg", alt: "Gallery Image 8" },
-    { id: 9, src: "/images/gallery/img9.jpg", alt: "Gallery Image 9" },
-    { id: 10, src: "/images/gallery/img10.jpg", alt: "Gallery Image 10" },
-    { id: 11, src: "/images/gallery/img11.jpg", alt: "Gallery Image 11" },
-    { id: 12, src: "/images/gallery/img12.jpg", alt: "Gallery Image 12" },
+    { id: 4, src: "/images/galery/img4.jpg", alt: "Gallery Image 4" },
+    { id: 5, src: "/images/galery/img5.jpg", alt: "Gallery Image 5" },
+    { id: 6, src: "/images/galery/img6.jpg", alt: "Gallery Image 6" },
+    { id: 7, src: "/images/galery/img7.jpg", alt: "Gallery Image 7" },
+    { id: 8, src: "/images/galery/img8.jpg", alt: "Gallery Image 8" },
+    { id: 9, src: "/images/galery/img9.jpg", alt: "Gallery Image 9" },
+    { id: 10, src: "/images/galery/img10.jpg", alt: "Gallery Image 10" },
+    { id: 11, src: "/images/galery/img11.jpg", alt: "Gallery Image 11" },
+    { id: 12, src: "/images/galery/img12.jpg", alt: "Gallery Image 12" },
+    { id: 12, src: "/images/galery/img13.jpg", alt: "Gallery Image 12" },
+    { id: 12, src: "/images/galery/img14.jpg", alt: "Gallery Image 12" },
   ];
 
   const nextImage = () => {
@@ -238,44 +403,9 @@ function App() {
     setSelectedImage(images[prevIndex]);
   };
 
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const itemsPerSlide = 6;
-  const totalSlides = Math.ceil(clientProjects.length / itemsPerSlide);
-
-  const nextSlide = () => {
-    if (!isAnimating) {
-      setIsAnimating(true);
-      setCurrentSlide((prev) => (prev + 1) % totalSlides);
-      setTimeout(() => setIsAnimating(false), 500);
-    }
-  };
-
-  const prevSlide = () => {
-    if (!isAnimating) {
-      setIsAnimating(true);
-      setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-      setTimeout(() => setIsAnimating(false), 500);
-    }
-  };
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      nextSlide();
-    }, 5000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const getCurrentSlideProjects = () => {
-    const startIndex = currentSlide * itemsPerSlide;
-    return clientProjects.slice(startIndex, startIndex + itemsPerSlide);
-  };
-
-  const scrollToSection = (id) => {
-    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
-  };
-
+  {
+    /* Back to Top */
+  }
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -315,6 +445,8 @@ function App() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  /* =============================================== BATAS FUNCTION ============================================================ */
 
   return (
     <div className="text-white flex flex-col">
@@ -395,102 +527,36 @@ function App() {
             className="flex flex-col items-center justify-center"
             style={{ padding: "0 200px" }}
           >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flexWrap: "wrap",
-                justifyContent: "space-around",
-              }}
-            >
-              {/* Text Section (top) */}
-              <div className="text-center" style={{ margin: "100px auto" }}>
-                <h1 className="text-5xl font-bold leading-tight text-black">
-                  Percayakan Perkembangan Masa Depan
-                  <br />
-                  Bisnis Anda Bersama Kami
-                </h1>
-              </div>
-
-              {/* List Section (2 columns, 2 rows) */}
-              <div className="w-full flex flex-wrap justify-between gap-6 pt-6">
-                {/* List Item 1 */}
-                <div className="flex items-center w-1/2 md:w-1/4 mb-6">
-                  <img
-                    src="/images/chart.png"
-                    alt="Item 1"
-                    className="w-16 h-16 object-cover mr-4"
-                  />
-                  <div>
-                    <h2 className="font-bold text-lg text-black">Data 1</h2>
-                    <p className="text-gray-600">Description for data 1.</p>
+            <div className="text-center" style={{ margin: "100px auto" }}>
+              <h1 className="text-5xl font-bold leading-tight text-black">
+                {title}
+              </h1>
+              <div className="w-full flex flex-wrap justify-between gap-6 pt-24 text-left">
+                {dataItems.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center w-1/2 md:w-1/4 mb-6"
+                  >
+                    <img
+                      src="/images/chart.png"
+                      alt={`Item ${index + 1}`}
+                      className="w-16 h-16 object-cover mr-5"
+                    />
+                    <div>
+                      <h2 className="font-bold text-xl text-black">
+                        {item.title}
+                      </h2>
+                      <motion.p
+                        className="text-gray-600 text-4xl font-semibold text-left"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1 }}
+                      >
+                        <AnimatedCounter value={item.value} />+
+                      </motion.p>
+                    </div>
                   </div>
-                </div>
-
-                {/* List Item 2 */}
-                <div className="flex items-center w-1/2 md:w-1/4 mb-6">
-                  <img
-                    src="/images/chart.png"
-                    alt="Item 2"
-                    className="w-16 h-16 object-cover mr-4"
-                  />
-                  <div>
-                    <h2 className="font-bold text-lg text-black">Data 2</h2>
-                    <p className="text-gray-600">Description for data 2.</p>
-                  </div>
-                </div>
-
-                {/* List Item 3 */}
-                <div className="flex items-center w-1/2 md:w-1/4 mb-6">
-                  <img
-                    src="/images/chart.png"
-                    alt="Item 3"
-                    className="w-16 h-16 object-cover mr-4"
-                  />
-                  <div>
-                    <h2 className="font-bold text-lg text-black">Data 3</h2>
-                    <p className="text-gray-600">Description for data 3.</p>
-                  </div>
-                </div>
-
-                {/* List Item 4 */}
-                <div className="flex items-center w-1/2 md:w-1/4 mb-6">
-                  <img
-                    src="/images/chart.png"
-                    alt="Item 3"
-                    className="w-16 h-16 object-cover mr-4"
-                  />
-                  <div>
-                    <h2 className="font-bold text-lg text-black">Data 3</h2>
-                    <p className="text-gray-600">Description for data 3.</p>
-                  </div>
-                </div>
-
-                {/* List Item 5 */}
-                <div className="flex items-center w-1/2 md:w-1/4 mb-6">
-                  <img
-                    src="/images/chart.png"
-                    alt="Item 3"
-                    className="w-16 h-16 object-cover mr-4"
-                  />
-                  <div>
-                    <h2 className="font-bold text-lg text-black">Data 3</h2>
-                    <p className="text-gray-600">Description for data 3.</p>
-                  </div>
-                </div>
-
-                {/* List Item 6 */}
-                <div className="flex items-center w-1/2 md:w-1/4 mb-6">
-                  <img
-                    src="/images/chart.png"
-                    alt="Item 3"
-                    className="w-16 h-16 object-cover mr-4"
-                  />
-                  <div>
-                    <h2 className="font-bold text-lg text-black">Data 3</h2>
-                    <p className="text-gray-600">Description for data 3.</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
@@ -501,7 +567,7 @@ function App() {
                 flexWrap: "wrap",
                 justifyContent: "space-around",
                 borderTop: "5px solid ",
-                marginTop: "100px",
+                marginTop: "50px",
                 marginBottom: "100px",
               }}
             >
@@ -590,7 +656,7 @@ function App() {
               guna meningkatkan brand awareness melalui value utama kami, yaitu
               <span className="font-bold">
                 {" "}
-                "Building your character in Social Media"
+                Building your character in Social Media
               </span>
             </p>
 
@@ -600,8 +666,13 @@ function App() {
             </button>
 
             <div className="grid grid-cols-4 gap-4 mt-8">
-              {[1, 2, 3, 4].map((item) => (
-                <div key={item} className="w-16 h-16 bg-gray-200 rounded-lg" />
+              {socialIcons.map((item, index) => (
+                <div
+                  key={index}
+                  className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors cursor-pointer"
+                >
+                  {item.icon}
+                </div>
               ))}
             </div>
           </div>
@@ -661,70 +732,24 @@ function App() {
       </div>
 
       {/* Client Section */}
-      <div id="about" className="w-full min-h-screen bg-black flex flex-col justify-center py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16 text-white">
+      <div className="w-full min-h-screen bg-beige flex flex-col justify-center py-16">
+        <div className="">
+          <h2 className="text-4xl font-bold text-center mb-16 text-black">
             Project Client Kami
           </h2>
 
-          <div className="relative flex justify-center">
-            <button
-              onClick={prevSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-20 bg-white/10 hover:bg-white/20 rounded-full p-4 text-white transition-all duration-300 hover:scale-110 z-10"
-              disabled={isAnimating}
-            >
-              <ChevronLeft size={24} />
-            </button>
-
-            <div className="overflow-hidden w-[650px]"> {/* Fixed width container */}
-              <div
-                className={`grid grid-cols-3 grid-rows-2 transition-opacity duration-500 ${
-                  isAnimating ? "opacity-0" : "opacity-100"
-                }`}
-              >
-                {getCurrentSlideProjects().map((project) => (
-                  <div key={project.id} className="aspect-square relative group flex justify-center items-center">
-                    <div className="w-48 h-48 bg-white rounded-lg overflow-hidden transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-2xl">
-                      <img
-                        src={project.image}
-                        alt={project.alt}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <button
-              onClick={nextSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-20 bg-white/10 hover:bg-white/20 rounded-full p-4 text-white z-10 transition-all duration-300 hover:scale-110"
-              disabled={isAnimating}
-            >
-              <ChevronRight size={24} />
-            </button>
-          </div>
-
-          <div className="flex justify-center mt-8 gap-2">
-            {Array.from({ length: totalSlides }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  if (!isAnimating) {
-                    setIsAnimating(true);
-                    setCurrentSlide(index);
-                    setTimeout(() => setIsAnimating(false), 500);
-                  }
-                }}
-                className={`h-2 rounded-full transition-all duration-500 ${
-                  currentSlide === index
-                    ? "w-8 bg-white"
-                    : "w-2 bg-gray-500 hover:bg-gray-300"
-                }`}
-              />
-            ))}
+          <div className="relative">
+            <CarouselRow items={row1} position={position1} />
+            <CarouselRow items={row2} position={position2} />
           </div>
         </div>
+
+        {selectedClient && (
+          <Modal
+            client={selectedClient}
+            onClose={() => setSelectedClient(null)}
+          />
+        )}
       </div>
 
       {/* Pricing Sections */}
@@ -858,7 +883,7 @@ function App() {
           {/* Logo and Contact */}
           <div className="flex flex-col">
             <img
-              src="images/KOSI Square Black 2.png"
+              src="/public/images/KOSI Square  Black 2.png"
               alt="KOSI"
               className="h-16 w-auto object-contain mb-6"
             />
@@ -890,7 +915,7 @@ function App() {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
               tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
             </p>
-            <div className="flex gap-2">
+            <div className="flex gap-2 text-black">
               <input
                 type="email"
                 placeholder="Email"
@@ -910,33 +935,48 @@ function App() {
             <div className="flex gap-4">
               <a
                 href="#"
-                className="bg-black p-2 rounded-full hover:bg-gray-800"
+                className="bg-white p-2 rounded-full hover:bg-yellow-200"
               >
-                <img
-                  src="/api/placeholder/24/24"
-                  alt="TikTok"
-                  className="w-6 h-6"
-                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                  className="w-8 h-8"
+                >
+                  <path
+                    fill=""
+                    d="M448 209.9a210.1 210.1 0 0 1-122.8-39.3v178.8A162.6 162.6 0 1 1 185 188.3v89.9a74.6 74.6 0 1 0 52.2 71.2V0h88a121.2 121.2 0 0 0 1.9 22.2 122.2 122.2 0 0 0 53.9 80.2 121.2 121.2 0 0 0 67 20.7z"
+                  />
+                </svg>
               </a>
               <a
                 href="#"
-                className="bg-black p-2 rounded-full hover:bg-gray-800"
+                className="bg-white p-2 rounded-full hover:bg-yellow-200"
               >
-                <img
-                  src="/api/placeholder/24/24"
-                  alt="WhatsApp"
-                  className="w-6 h-6"
-                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                  className="w-8 h-8"
+                >
+                  <path
+                    fill=""
+                    d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+                  />
+                </svg>
               </a>
               <a
                 href="#"
-                className="bg-black p-2 rounded-full hover:bg-gray-800"
+                className="bg-white p-2 rounded-full hover:bg-yellow-200"
               >
-                <img
-                  src="/api/placeholder/24/24"
-                  alt="Instagram"
-                  className="w-6 h-6"
-                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                  className="w-8 h-8"
+                >
+                  <path
+                    fill=""
+                    d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                  />
+                </svg>
               </a>
             </div>
           </div>
@@ -954,6 +994,26 @@ function App() {
       </button>
     </div>
   );
+}
+
+// Counter Angka
+function AnimatedCounter({ value }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const end = value;
+    if (start === end) return;
+    let totalDuration = 2000;
+    let incrementTime = totalDuration / end;
+    let timer = setInterval(() => {
+      start += 1;
+      setCount(start);
+      if (start === end) clearInterval(timer);
+    }, incrementTime);
+  }, [value]);
+
+  return <span>{count}</span>;
 }
 
 export default App;
