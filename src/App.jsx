@@ -308,7 +308,7 @@ function App() {
         "Photographer & Editor",
         "Visit 1-2x sebulan",
       ],
-      isTopSeller: true
+      isTopSeller: true,
     },
     {
       title: "Silver Package",
@@ -766,10 +766,41 @@ function App() {
               key={index}
               className="relative bg-white rounded-t-2xl overflow-hidden shadow-lg flex flex-col h-full"
             >
-              {/* Badge for Top Seller */}
-              {pack.isTopSeller && (
-                <div className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold py-1 px-3 rounded-bl-lg">
-                  Top Seller
+              {/* Badge logic for different packages */}
+              {pack.title === "Bronze Package" && (
+                <div className="absolute -top-6 right-0 transform -rotate-12 z-10">
+                  <img
+                    src="/images/bronze.png"
+                    alt="Bronze Badge"
+                    className="w-16 h-16"
+                  />
+                </div>
+              )}
+              {pack.title === "Silver Package" && (
+                <div className="absolute -top-6 right-0 transform -rotate-12 z-10">
+                  <img
+                    src="/images/silver.png"
+                    alt="Silver Badge"
+                    className="w-16 h-16"
+                  />
+                </div>
+              )}
+              {pack.title === "Gold Package" && (
+                <div className="absolute -top-6 right-0 transform -rotate-12 z-10">
+                  <img
+                    src="/images/gold.png"
+                    alt="Gold Badge"
+                    className="w-16 h-16"
+                  />
+                </div>
+              )}
+              {pack.title === "Paket Live Shopping" && (
+                <div className="absolute -top-6 right-0 transform -rotate-12 z-10">
+                  <img
+                    src="/images/best-offer-badge-a4e224.webp"
+                    alt="Best Offer Badge"
+                    className="w-16 h-16"
+                  />
                 </div>
               )}
 
