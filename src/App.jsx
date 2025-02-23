@@ -768,16 +768,16 @@ function App() {
             >
               {/* Badge logic for different packages */}
               {pack.title === "Bronze Package" && (
-                <div className="absolute -top-6 right-0 transform -rotate-12 z-10">
+                <div className="absolute -top-10 right-14 mr-14 pr-14 transform -rotate-12 z-10">
                   <img
                     src="/images/bronze.png"
                     alt="Bronze Badge"
-                    className="w-16 h-16"
+                    className="w-25 h-25"
                   />
                 </div>
               )}
               {pack.title === "Silver Package" && (
-                <div className="absolute -top-6 right-0 transform -rotate-12 z-10">
+                <div className="absolute top-14 right-14 mr-14 pr-14 transform -rotate-12 z-10">
                   <img
                     src="/images/silver.png"
                     alt="Silver Badge"
@@ -786,7 +786,7 @@ function App() {
                 </div>
               )}
               {pack.title === "Gold Package" && (
-                <div className="absolute -top-6 right-0 transform -rotate-12 z-10">
+                <div className="absolute top-14 right-14 mr-14 pr-14 transform -rotate-12 z-10">
                   <img
                     src="/images/gold.png"
                     alt="Gold Badge"
@@ -795,7 +795,7 @@ function App() {
                 </div>
               )}
               {pack.title === "Paket Live Shopping" && (
-                <div className="absolute -top-6 right-0 transform -rotate-12 z-10">
+                <div className="absolute top-14 right-14 mr-14 pr-14 transform -rotate-12 z-10">
                   <img
                     src="/images/best-offer-badge-a4e224.webp"
                     alt="Best Offer Badge"
@@ -804,11 +804,11 @@ function App() {
                 </div>
               )}
 
-              <div className="bg-yellow-400 py-4">
+              {/* <div className="bg-yellow-400 py-9">
                 <h3 className="text-xl font-bold text-center text-black">
                   {pack.title}
                 </h3>
-              </div>
+              </div> */}
 
               <div className="p-6 bg-[#F5F5DC] flex-grow flex flex-col">
                 <div className="text-center mb-6">
