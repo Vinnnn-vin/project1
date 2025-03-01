@@ -6,10 +6,11 @@ const Services = ({ services }) => {
       <div className="absolute inset-0 bg-black/50"></div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">
-            <span className="text-yellow-400">Layanan Terbaik</span> untuk
+          <h2 className="text-3xl sm:text-5xl font-bold leading-tight mb-6">
+            <span className="text-yellow-400">LAYANAN TERBAIK</span> UNTUK
+            <br/>
+            KEBUTUHAN ANDA
           </h2>
-          <h2 className="text-4xl font-bold">Kebutuhan Anda</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, index) => (

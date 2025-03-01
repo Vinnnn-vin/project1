@@ -15,7 +15,7 @@ function App() {
   const [activeSection, setActiveSection] = useState("");
 
   const sections = ["contents", "services", "about", "gallery"];
-  const sectionNames = ["All Contents & Event", "Services", "About KOSI", "Gallery KOSI"];
+  const sectionNames = ["Beranda", "Layanan Kami", "Tentang Kami", "Portofolio Kami"];
 
   const scrollToSection = (id) => {
     document.getElementById(id).scrollIntoView({ behavior: "smooth" });
@@ -196,7 +196,7 @@ function App() {
         "Strategi & Perencanaan (analisa + konsep & ide + monthly report & evaluasi)",
         "Scriptwriting",
         "Copywriting Instagram",
-        "Admin Instagram (reply dm, comment, upload video)",
+        "Admin Instagram (reply DM, comment, upload video)",
         "Instagram Ads",
         "Photographer & Editor",
         "Visit 1-2x sebulan",
@@ -211,7 +211,7 @@ function App() {
         "Strategi Perencanaan (analisa + konsep & ide + monthly report & evaluasi)",
         "Scriptwriting",
         "Copywriting Tiktok & Instagram",
-        "Admin Tiktok & Instagram (reply dm, comment, upload video)",
+        "Admin Tiktok & Instagram (reply DM, comment, upload video)",
         "Tiktok & Instagram Ads",
         "Videographer & Editor",
         "Visit 2-4x sebulan",
@@ -228,7 +228,7 @@ function App() {
         "Strategi & Perencanaan (analisa + konsep & ide + monthly report & evaluasi)",
         "Scriptwriting",
         "Copywriting Tiktok & Instagram",
-        "Admin Tiktok & Instagram (reply dm, comment, upload video)",
+        "Admin Tiktok & Instagram (reply DM, comment, upload video)",
         "Tiktok Ads",
         "Videographer & Editor",
         "Visit 1-2x sebulan",
@@ -246,7 +246,7 @@ function App() {
         "Studio + Perlengkapan + Properti",
         "Scriptwriting Tiktok",
         "Copywriting Tiktok",
-        "Admin Tiktok (reply dm, comment, upload video)",
+        "Admin Tiktok (reply DM, comment, upload video)",
         "Videographer & Editor",
         "Studio & Perlengkapan",
       ],
@@ -284,8 +284,8 @@ function App() {
 
   return (
     <div className="text-white flex flex-col">
-      <Navbar sections={sections} sectionNames={sectionNames} activeSection={activeSection} scrollToSection={scrollToSection} />
-      <Banner />
+      {/* <Navbar sections={sections} sectionNames={sectionNames} activeSection={activeSection} scrollToSection={scrollToSection} /> */}
+      <Banner sections={sections} sectionNames={sectionNames} activeSection={activeSection} scrollToSection={scrollToSection} />
       <Contents title={title} dataItems={dataItems} />
       <WhyKosi socialIcons={socialIcons} />
       <Services services={services} />

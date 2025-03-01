@@ -4,8 +4,8 @@ const WhyKosi = ({ socialIcons }) => {
   return (
     <div id="whyKosi" className="w-full min-h-screen bg-yellow-300 flex items-center p-8">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div className="space-y-6">
-          <h2 className="text-4xl font-bold text-black">Mengapa KOSI?</h2>
+        <div className="font-barlow space-y-6">
+          <h2 className="text-3xl sm:text-5xl font-bold leading-tight mb-6 text-black">MENGAPA <i>KOSI</i> ENTERTAINMENT?</h2>
           <p className="text-lg text-black">
             Kami adalah tim yang berdedikasi untuk bekerjasama dengan klien, guna meningkatkan brand awareness melalui value utama kami, yaitu
             <span className="font-bold"> Building your character in Social Media</span>

@@ -3,35 +3,35 @@ import React from 'react';
 const Pricing = ({ pricingData }) => {
   return (
     <div id="pricing" className="w-full py-16 bg-gray-100">
-      <div className="text-black text-center pb-10 text-2xl">
-        <b><h2>Layanan Kami</h2></b>
+      <div className="text-3xl sm:text-4xl font-bold text-center mb-16 text-black">
+        <h2>Layanan Kami</h2>
       </div>
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
         {pricingData.map((pack, index) => (
-          <div key={index} className="relative bg-white rounded-t-2xl overflow-hidden shadow-lg flex flex-col h-full">
+          <div key={index} className="relative bg-white rounded-t-2xl overflow shadow-lg flex flex-col h-full">
             {pack.title === "Bronze Package" && (
-              <div className="absolute -top-10 right-14 mr-14 pr-14 transform -rotate-12 z-10">
-                <img src="/images/bronze.png" alt="Bronze Badge" className="w-25 h-25" />
+              <div className="absolute -top-12 right-14 mr-14 pr-14 transform -rotate-12 z-10">
+                <img src="/images/bronze.png" alt="Bronze Badge" className="w-20 h-20" />
               </div>
             )}
             {pack.title === "Silver Package" && (
-              <div className="absolute top-14 right-14 mr-14 pr-14 transform -rotate-12 z-10">
-                <img src="/images/silver.png" alt="Silver Badge" className="w-16 h-16" />
+              <div className="absolute -top-12 right-14 mr-14 pr-14 transform -rotate-12 z-10">
+                <img src="/images/silver.png" alt="Silver Badge" className="w-20 h-20" />
               </div>
             )}
             {pack.title === "Gold Package" && (
-              <div className="absolute top-14 right-14 mr-14 pr-14 transform -rotate-12 z-10">
-                <img src="/images/gold.png" alt="Gold Badge" className="w-16 h-16" />
+              <div className="absolute -top-12 right-14 mr-14 pr-14 transform -rotate-12 z-10">
+                <img src="/images/gold.png" alt="Gold Badge" className="w-20 h-20" />
               </div>
             )}
             {pack.title === "Paket Live Shopping" && (
-              <div className="absolute top-14 right-14 mr-14 pr-14 transform -rotate-12 z-10">
-                <img src="/images/best-offer-badge-a4e224.webp" alt="Best Offer Badge" className="w-16 h-16" />
+              <div className="absolute top-12 right-14 mr-14 pr-14 transform -rotate-12 z-10">
+                <img src="/images/best-offer-badge-a4e224.webp" alt="Best Offer Badge" className="w-20 h-20" />
               </div>
             )}
             <div className="p-6 bg-[#F5F5DC] flex-grow flex flex-col">
-              <div className="text-center mb-6">
-                <span className="text-sm text-black"><b>Rp</b></span>
+              <div className="text-center mt-10 mb-6">
+                <span className="text-sm text-black"><b>Rp </b></span>
                 <span className="text-4xl font-bold text-gray-800">{pack.price}</span>
                 <span className="text-sm text-gray-600 ml-1">/ Bulan</span>
               </div>
