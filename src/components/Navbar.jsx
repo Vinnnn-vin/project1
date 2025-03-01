@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Navbar = ({ sections, sectionNames, activeSection, scrollToSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State untuk mengontrol menu hamburger
@@ -51,7 +51,7 @@ const Navbar = ({ sections, sectionNames, activeSection, scrollToSection }) => {
                   scrollToSection(section);
                   setIsMenuOpen(false); // Tutup menu setelah diklik
                 }}
-                className={`block px-4 py-2 text-white hover:text-yellow-500 transition-colors cursor-pointer ${
+                className={`block px-4 py-2 text-black hover:text-yellow-500 transition-colors cursor-pointer ${
                   activeSection === section ? "text-yellow-500" : ""
                 }`}
               >

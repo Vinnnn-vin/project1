@@ -51,19 +51,20 @@ const Pricing = ({ pricingData }) => {
         {/* Judul Section */}
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-black">
-            Layanan Kami
+            LAYANAN KAMI
           </h2>
+          <h3 className="text-black"> Kami menyediakan berbagai paket sesuai kebutuhan anda</h3>
         </div>
 
         {/* Grid Card Pricing */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 mt-20 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pricingData.map((pack, index) => (
             <div
               key={index}
-              className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="relative bg-[#F5F5DC] rounded-2xl overflow shadow-lg hover:shadow-xl transition-shadow duration-300 mt-20"
             >
               {/* Badge */}
-              {pack.title === "Bronze Package" && (
+              {/* {pack.title === "Bronze Package" && (
                 <div className="absolute -top-8 right-8 transform -rotate-12 z-10">
                   <img
                     src="/images/bronze.png"
@@ -98,12 +99,34 @@ const Pricing = ({ pricingData }) => {
                     className="w-16 h-16"
                   />
                 </div>
-              )}
+              )} */}  
+
+            {pack.title === "Bronze Package" && (
+              <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 -rotate-12 z-10">
+                <img src="/images/bronze.png" alt="Bronze Badge" className="w-20 h-20" />
+              </div>
+            )}
+            {pack.title === "Silver Package" && (
+              <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 -rotate-12 z-10">
+                <img src="/images/silver.png" alt="Silver Badge" className="w-20 h-20" />
+              </div>
+            )}
+            {pack.title === "Gold Package" && (
+              <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 -rotate-12 z-10">
+                <img src="/images/gold.png" alt="Gold Badge" className="w-20 h-20" />
+              </div>
+            )}
+            {pack.title === "Paket Live Shopping" && (
+              <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 -rotate-12 z-10">
+                <img src="/images/best-offer-badge-a4e224.webp" alt="Best Offer Badge" className="w-20 h-20" />
+              </div>
+            )}
 
               {/* Konten Card */}
-              <div className="p-6 bg-[#F5F5DC] flex flex-col h-full">
+              <div className="p-6 bg-[#F5F5DC] flex flex-col h-full mt-10">
                 {/* Harga */}
-                <div className="text-center mb-6">
+                <div className="text-center mt-0 mb-6">
+                <h2 className='text-center mb-6 text-black'>{pack.title}</h2>
                   <span className="text-sm text-black"><b>Rp</b></span>
                   <span className="text-3xl sm:text-4xl font-bold text-gray-800">
                     {pack.price}

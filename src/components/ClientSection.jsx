@@ -76,7 +76,7 @@ const ClientSection = ({ row1, row2 }) => {
     <div className="min-h-screen bg-beige flex flex-col justify-center py-12 sm:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16 text-black">
-          Project Client Kami
+          PROJECT CLIENT KAMI
         </h2>
         <div className="relative space-y-8">
           <CarouselRow items={row1} position={position1} />
