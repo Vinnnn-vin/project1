@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-yellow-400 px-8 py-12">
+    <footer className="bg-yellow-400 px-4 sm:px-8 py-12">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="flex flex-col">
           <img src="/public/images/KOSI Square  Black 2.png" alt="KOSI" className="h-16 w-auto object-contain mb-6" />

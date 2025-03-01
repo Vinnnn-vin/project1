@@ -2,11 +2,11 @@ import React from 'react';
 
 const Banner = () => {
   return (
-    <div className="container relative h-screen bg-cover bg-center" style={{ backgroundImage: "url('/images/background.jpg')" }}>
+    <div className="relative h-screen bg-cover bg-center" style={{ backgroundImage: "url('/images/background.jpg')" }}>
       <div className="absolute inset-0 bg-black/50 backdrop-blur-lg"></div>
-      <div id="banner" className="flex-1 flex items-center justify-between h-screen px-20 relative">
-        <div className="text-left w-1/2">
-          <h1 className="text-5xl font-bold leading-tight mb-6">
+      <div id="banner" className="flex-1 flex flex-col md:flex-row items-center justify-between h-screen px-4 sm:px-20 relative">
+        <div className="text-left w-full md:w-1/2 mb-8 md:mb-0">
+          <h1 className="text-3xl sm:text-5xl font-bold leading-tight mb-6">
             Build Your Brand Identity
             <br />
             With Social Media
@@ -17,7 +17,7 @@ const Banner = () => {
             </a>
           </button>
         </div>
-        <div className="w-1/2">
+        <div className="w-full md:w-1/2">
           <img src="/images/banner.jpg" alt="Brand Image" className="h-full w-full object-cover" />
         </div>
       </div>

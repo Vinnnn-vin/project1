@@ -2,7 +2,7 @@ import React from 'react';
 
 const Navbar = ({ sections, sectionNames, activeSection, scrollToSection }) => {
   return (
-    <nav className="w-full flex justify-between items-center bg-black top-0 z-10 px-20 py-6">
+    <nav className="w-full flex justify-between items-center bg-black top-0 z-10 px-4 sm:px-20 py-6">
       <div className="flex items-center">
         <img
           src="images/KOSI Square White 2.png"

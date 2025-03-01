@@ -41,7 +41,7 @@ const ClientSection = ({ row1, row2 }) => {
     <div className="overflow-hidden">
       <div className="flex gap-8 transition-transform duration-300" style={{ transform: `translateX(${position}px)`, width: "fit-content" }}>
         {[...items, ...items].map((client, index) => (
-          <div key={`${client.id}-${index}`} onClick={() => setSelectedClient(client)} className="w-40 h-40 rounded-lg overflow-hidden flex items-center justify-center p-4 cursor-pointer group">
+          <div key={`${client.id}-${index}`} onClick={() => setSelectedClient(client)} className="w-32 h-32 md:w-40 md:h-40 rounded-lg overflow-hidden flex items-center justify-center p-4 cursor-pointer group">
             <img src={client.image} alt={client.alt} className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110" />
           </div>
         ))}
@@ -50,9 +50,9 @@ const ClientSection = ({ row1, row2 }) => {
   );
 
   return (
-    <div className="w-full min-h-screen bg-beige flex flex-col justify-center py-16">
+    <div className="min-h-screen bg-beige flex flex-col justify-center py-16">
       <div className="">
-        <h2 className="text-4xl font-bold text-center mb-16 text-black">Project Client Kami</h2>
+        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16 text-black">Project Client Kami</h2>
         <div className="relative">
           <CarouselRow items={row1} position={position1} />
           <CarouselRow items={row2} position={position2} />

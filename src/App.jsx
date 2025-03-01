@@ -9,6 +9,7 @@ import Pricing from './components/Pricing';
 import Gallery from './components/Gallery';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
+import './App.css';
 
 function App() {
   const [activeSection, setActiveSection] = useState("");
