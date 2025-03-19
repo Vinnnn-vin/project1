@@ -84,102 +84,102 @@ function App() {
   const row1 = [
     {
       id: 1,
-      image: "/public/images/logo_client/bonami.png",
+      image: "/images/logo_client/bonami.png",
       alt: "Bon Ami",
       description: "EONS Skin Clinic - Beauty & Healthcare",
     },
     {
       id: 2,
-      image: "/public/images/logo_client/Pertamina_Logo.svg.png",
+      image: "/images/logo_client/Pertamina_Logo.svg.png",
       alt: "Pertamina",
     },
     {
       id: 3,
-      image: "public/images/logo_client/ropopang-removebg-preview.png",
+      image: "/images/logo_client/ropopang-removebg-preview.png",
       alt: "Ropopang",
     },
     {
       id: 4,
-      image: "public/images/logo_client/images-removebg-preview.png",
+      image: "/images/logo_client/images-removebg-preview.png",
       alt: "Saos Raja Rasa",
     },
     {
       id: 5,
-      image: "public/images/logo_client/sate_merapi-removebg-preview.png",
+      image: "/images/logo_client/sate_merapi-removebg-preview.png",
       alt: "Sate Merapi",
     },
     {
       id: 6,
-      image: "public/images/logo_client/tang_kitchen-removebg-preview.png",
+      image: "/images/logo_client/tang_kitchen-removebg-preview.png",
       alt: "Tang Kitchen",
     },
     {
       id: 7,
-      image: "public/images/logo_client/Terbaiktronics.jpg",
+      image: "/images/logo_client/Terbaiktronics.jpg",
       alt: "Terbaik Tronics",
     },
     {
       id: 8,
-      image: "public/images/logo_client/WhatsApp_Image_2024-12-31_at_10.14.56__1_-removebg-preview.png",
+      image: "/images/logo_client/WhatsApp_Image_2024-12-31_at_10.14.56__1_-removebg-preview.png",
       alt: "SCBD",
     },
     {
       id: 9,
-      image: "public/images/logo_client/WhatsApp_Image_2024-12-31_at_10.14.56__2_-removebg-preview.png",
+      image: "/images/logo_client/WhatsApp_Image_2024-12-31_at_10.14.56__2_-removebg-preview.png",
       alt: "Branded Plus",
     },
     {
       id: 10,
-      image: "public/images/logo_client/WhatsApp_Image_2024-12-31_at_10.14.57__1_-removebg-preview.png",
+      image: "/images/logo_client/WhatsApp_Image_2024-12-31_at_10.14.57__1_-removebg-preview.png",
       alt: "Dokter?",
     },
   ];
 
   const row2 = [
-    { id: 11, image: "/public/images/logo_client/bonami.png", alt: "Bon Ami" },
+    { id: 11, image: "/images/logo_client/bonami.png", alt: "Bon Ami" },
     {
       id: 12,
-      image: "/public/images/logo_client/Pertamina_Logo.svg.png",
+      image: "/images/logo_client/Pertamina_Logo.svg.png",
       alt: "Pertamina",
     },
     {
       id: 13,
-      image: "public/images/logo_client/ropopang-removebg-preview.png",
+      image: "/images/logo_client/ropopang-removebg-preview.png",
       alt: "Ropopang",
     },
     {
       id: 14,
-      image: "public/images/logo_client/images-removebg-preview.png",
+      image: "/images/logo_client/images-removebg-preview.png",
       alt: "Saos Raja Rasa",
     },
     {
       id: 15,
-      image: "public/images/logo_client/sate_merapi-removebg-preview.png",
+      image: "/images/logo_client/sate_merapi-removebg-preview.png",
       alt: "Sate Merapi",
     },
     {
       id: 16,
-      image: "public/images/logo_client/tang_kitchen-removebg-preview.png",
+      image: "/images/logo_client/tang_kitchen-removebg-preview.png",
       alt: "Tang Kitchen",
     },
     {
       id: 17,
-      image: "public/images/logo_client/Terbaiktronics.jpg",
+      image: "/images/logo_client/Terbaiktronics.jpg",
       alt: "Terbaik Tronics",
     },
     {
       id: 18,
-      image: "public/images/logo_client/WhatsApp_Image_2024-12-31_at_10.14.56__1_-removebg-preview.png",
+      image: "/images/logo_client/WhatsApp_Image_2024-12-31_at_10.14.56__1_-removebg-preview.png",
       alt: "SCBD",
     },
     {
       id: 19,
-      image: "public/images/logo_client/WhatsApp_Image_2024-12-31_at_10.14.56__2_-removebg-preview.png",
+      image: "/images/logo_client/WhatsApp_Image_2024-12-31_at_10.14.56__2_-removebg-preview.png",
       alt: "Branded Plus",
     },
     {
       id: 20,
-      image: "public/images/logo_client/WhatsApp_Image_2024-12-31_at_10.14.57__1_-removebg-preview.png",
+      image: "/images/logo_client/WhatsApp_Image_2024-12-31_at_10.14.57__1_-removebg-preview.png",
       alt: "Dokter?",
     },
   ];
