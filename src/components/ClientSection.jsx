@@ -1,92 +1,194 @@
-import React, { useState, useEffect } from 'react';
-import { X } from 'react-feather'; // Pastikan untuk mengimpor ikon X dari react-feather atau library serupa
+import React, { useState, useEffect, useRef } from 'react';
+import { X } from 'react-feather';
 
 const ClientSection = ({ row1, row2 }) => {
   const [position1, setPosition1] = useState(0);
   const [position2, setPosition2] = useState(0);
   const [selectedClient, setSelectedClient] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const modalRef = useRef(null);
+  const modalContentRef = useRef(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setPosition1((prev) => {
-        const newPos = prev - 1;
-        return Math.abs(newPos) >= row1.length * 200 ? 0 : newPos;
-      });
-
-      setPosition2((prev) => {
-        const newPos = prev - 1;
-        return Math.abs(newPos) >= row2.length * 200 ? 0 : newPos;
-      });
+      if (!isDragging) {
+        setPosition1(prev => (Math.abs(prev - 1) >= row1.length * 200 ? 0 : prev - 1));
+        setPosition2(prev => (Math.abs(prev - 1) >= row2.length * 200 ? 0 : prev - 1));
+      }
     }, 20);
     return () => clearInterval(interval);
-  }, [row1.length, row2.length]);
+  }, [row1.length, row2.length, isDragging]);
 
-  const Modal = ({ client, onClose }) => (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 sm:p-8 max-w-2xl w-full mx-4 relative">
-        <button
-          onClick={onClose}
-          className="absolute right-4 top-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
+  // Manage keyboard events for modal
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && selectedClient) {
+        closeModal();
+      }
+    };
+
+    if (selectedClient) {
+      window.addEventListener('keydown', handleKeyDown);
+      // Prevent scrolling when modal is open
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      // Restore scrolling when modal is closed
+      document.body.style.overflow = 'auto';
+    };
+  }, [selectedClient]);
+
+  const handlePointerDown = (e) => {
+    setIsDragging(false);
+    setStartX(e.clientX || (e.touches && e.touches[0].clientX) || 0);
+  };
+
+  const handlePointerMove = (e) => {
+    if (!startX) return;
+    
+    const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+    if (Math.abs(currentX - startX) > 5) {
+      setIsDragging(true);
+    }
+  };
+
+  const handlePointerUp = (client) => {
+    if (!isDragging) {
+      openModal(client);
+    }
+    setIsDragging(false);
+    setStartX(0);
+  };
+
+  // Clear function to open modal
+  const openModal = (client) => {
+    setSelectedClient(client);
+  };
+
+  // Clear function to close modal
+  const closeModal = () => {
+    setSelectedClient(null);
+  };
+
+  // Handle click outside the modal content
+  const handleOutsideClick = (e) => {
+    if (modalRef.current === e.target && !modalContentRef.current.contains(e.target)) {
+      closeModal();
+    }
+  };
+
+  // Simple Modal component
+  const Modal = ({ client }) => {
+    return (
+      <div 
+        ref={modalRef}
+        className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+        onClick={handleOutsideClick}
+        role="dialog"
+        aria-modal="true"
+      >
+        <div 
+          ref={modalContentRef}
+          className="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 relative shadow-2xl"
         >
-          <X size={24} />
-        </button>
-        <div className="flex flex-col items-center">
-          <div className="w-48 h-48 sm:w-64 sm:h-64 flex items-center justify-center mb-6">
-            <img
-              src={client.image}
-              alt={client.alt}
-              className="max-w-full max-h-full object-contain"
-            />
+          {/* Close button - simplified and isolated */}
+          <button
+            type="button"
+            onClick={closeModal}
+            className="absolute -top-10 right-0 sm:-right-10 p-2 bg-white/20 hover:bg-white/30 rounded-full transition-all duration-300"
+            aria-label="Close modal"
+          >
+            <X size={28} className="text-white hover:text-yellow-400 transition-colors" strokeWidth={2.5} />
+          </button>
+          
+          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+            <div className="w-full md:w-1/2 flex justify-center">
+              <div className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 flex items-center justify-center bg-gray-50 rounded-lg p-4">
+                <img
+                  src={client.image}
+                  alt={client.alt}
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
+            </div>
+            <div className="w-full md:w-1/2">
+              <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800">
+                {client.alt}
+              </h3>
+              <p className="text-gray-600 text-sm sm:text-base">
+                {client.description || "No description available"}
+              </p>
+              
+              {/* Additional close button for mobile */}
+              <button
+                type="button"
+                onClick={closeModal}
+                className="mt-6 md:hidden w-full py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors flex items-center justify-center gap-2"
+              >
+                <X size={18} />
+                Close
+              </button>
+            </div>
           </div>
-          <h3 className="text-xl sm:text-2xl font-bold mb-4 text-center">
-            {client.alt}
-          </h3>
-          <p className="text-sm sm:text-base text-gray-600 text-center">
-            {client.description}
-          </p>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
+
+  const CarouselItem = ({ client }) => {
+    return (
+      <div
+        className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-lg bg-white shadow-md overflow-hidden flex items-center justify-center p-3 cursor-pointer group hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+        onMouseDown={handlePointerDown}
+        onMouseMove={handlePointerMove}
+        onMouseUp={() => handlePointerUp(client)}
+        onMouseLeave={() => {
+          setIsDragging(false);
+          setStartX(0);
+        }}
+        onTouchStart={handlePointerDown}
+        onTouchMove={handlePointerMove}
+        onTouchEnd={() => handlePointerUp(client)}
+      >
+        <img
+          src={client.image}
+          alt={client.alt}
+          className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
+        />
+      </div>
+    );
+  };
 
   const CarouselRow = ({ items, position }) => (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden py-2">
       <div
-        className="flex gap-4 sm:gap-8 transition-transform duration-300"
+        className="flex gap-6 sm:gap-8 transition-transform duration-300 will-change-transform"
         style={{ transform: `translateX(${position}px)`, width: "fit-content" }}
       >
         {[...items, ...items].map((client, index) => (
-          <div
-            key={`${client.id}-${index}`}
-            onClick={() => setSelectedClient(client)}
-            className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-lg overflow-hidden flex items-center justify-center p-2 sm:p-4 cursor-pointer group hover:shadow-lg transition-shadow duration-300"
-          >
-            <img
-              src={client.image}
-              alt={client.alt}
-              className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110"
-            />
-          </div>
+          <CarouselItem key={`${client.id}-${index}`} client={client} />
         ))}
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-beige flex flex-col justify-center py-12 sm:py-16">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16 text-black">
+    <section id="clients" className="min-h-screen bg-beige flex flex-col justify-center py-16 sm:py-20 px-4 sm:px-6">
+      <div className="container mx-auto">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-16 text-gray-900">
           PROJECT CLIENT KAMI
         </h2>
-        <div className="relative space-y-8">
+        <div className="space-y-8 md:space-y-12">
           <CarouselRow items={row1} position={position1} />
           <CarouselRow items={row2} position={position2} />
         </div>
       </div>
-      {selectedClient && (
-        <Modal client={selectedClient} onClose={() => setSelectedClient(null)} />
-      )}
-    </div>
+      
+      {selectedClient && <Modal client={selectedClient} />}
+    </section>
   );
 };
 
