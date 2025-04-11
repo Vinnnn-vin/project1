@@ -4,7 +4,7 @@ import AnimatedCounter from './AnimatedCounter';
 
 const Contents = ({ title, dataItems }) => {
   return (
-    <div id="contents" className="flex flex-col justify-center py-12 bg-[#ECEBD3]">
+    <div id="contents" className="flex flex-col justify-center py-12 bg-[#ECEBD3] pt-24 min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Judul Section */}
         <div className="text-center mb-12">

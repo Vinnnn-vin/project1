@@ -49,7 +49,7 @@ const Pricing = ({ pricingData }) => {
     <div id="pricing" className="w-full py-12 sm:py-16 bg-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Judul Section */}
-        <div className="text-center mb-8 sm:mb-12">
+        <div className="text-center mb-8 sm:mb-12 mt-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-black">
             LAYANAN KAMI
           </h2>
@@ -57,7 +57,7 @@ const Pricing = ({ pricingData }) => {
         </div>
 
         {/* Grid Card Pricing */}
-        <div className="grid grid-cols-1 mt-20 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 mt-15 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pricingData.map((pack, index) => (
             <div
               key={index}

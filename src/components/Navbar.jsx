@@ -1,10 +1,24 @@
 import React, { useState, useEffect } from 'react';
 
 const Navbar = ({ sections, sectionNames, activeSection, scrollToSection }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State untuk mengontrol menu hamburger
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 30) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="w-full fixed top-0 left-0 bg-black z-50">
+    <nav className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-black/90 backdrop-blur-md' : 'bg-transparent'}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
@@ -42,16 +56,16 @@ const Navbar = ({ sections, sectionNames, activeSection, scrollToSection }) => {
         <ul
           className={`${
             isMenuOpen ? 'block' : 'hidden'
-          } md:flex md:space-x-6 absolute md:static top-16 right-0 bg-black w-full md:w-auto text-center py-4 md:py-0`}
+          } md:flex md:space-x-6 absolute md:static top-16 left-0 right-0 bg-black md:bg-transparent w-full md:w-auto text-center py-4 md:py-0`}
         >
           {sections.map((section, idx) => (
             <li key={section} className="my-4 md:my-0">
               <a
                 onClick={() => {
                   scrollToSection(section);
-                  setIsMenuOpen(false); // Tutup menu setelah diklik
+                  setIsMenuOpen(false);
                 }}
-                className={`block px-4 py-2 text-black hover:text-yellow-500 transition-colors cursor-pointer ${
+                className={`block px-4 py-2 text-white hover:text-yellow-500 transition-colors cursor-pointer ${
                   activeSection === section ? "text-yellow-500" : ""
                 }`}
               >

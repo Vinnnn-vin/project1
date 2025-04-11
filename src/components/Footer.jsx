@@ -30,7 +30,7 @@ const Footer = () => {
       </div>
       <div className="max-w-6xl mx-auto mt-8 pt-8 border-t border-black/10">
         <div className="flex flex-wrap justify-between items-center">
-          <p>Andreas Calvin G © September 22, 2024</p>
+          <p>Kosi Entertainment © September 22, 2024</p>
           <div className="flex gap-4">
             <a href="#" className="bg-white p-2 rounded-full hover:bg-yellow-200">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="w-8 h-8">
