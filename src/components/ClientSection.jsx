@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { X } from 'react-feather';
+import React, { useState, useEffect, useRef } from "react";
+import { X } from "react-feather";
 
 const ClientSection = ({ row1, row2 }) => {
   const [position1, setPosition1] = useState(0);
@@ -9,36 +9,54 @@ const ClientSection = ({ row1, row2 }) => {
   const [startX, setStartX] = useState(0);
   const modalRef = useRef(null);
   const modalContentRef = useRef(null);
+  const modalCloseButtonRef = useRef(null);
 
   useEffect(() => {
+    // Animasi carousel
     const interval = setInterval(() => {
-      if (!isDragging) {
-        setPosition1(prev => (Math.abs(prev - 1) >= row1.length * 200 ? 0 : prev - 1));
-        setPosition2(prev => (Math.abs(prev - 1) >= row2.length * 200 ? 0 : prev - 1));
+      if (!isDragging && !selectedClient) { // Hentikan animasi saat modal terbuka
+        setPosition1((prev) =>
+          Math.abs(prev - 1) >= row1.length * 200 ? 0 : prev - 1
+        );
+        setPosition2((prev) =>
+          Math.abs(prev - 1) >= row2.length * 200 ? 0 : prev - 1
+        );
       }
     }, 20);
     return () => clearInterval(interval);
-  }, [row1.length, row2.length, isDragging]);
+  }, [row1.length, row2.length, isDragging, selectedClient]);
 
-  // Manage keyboard events for modal
+  // Event listener untuk Escape key
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && selectedClient) {
+      if (e.key === "Escape" && selectedClient) {
         closeModal();
       }
     };
 
     if (selectedClient) {
-      window.addEventListener('keydown', handleKeyDown);
-      // Prevent scrolling when modal is open
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden'; // Mencegah scrolling background
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = 'auto'; // Mengembalikan scrolling
     }
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      // Restore scrolling when modal is closed
       document.body.style.overflow = 'auto';
+      window.removeEventListener("keydown", handleKeyDown);
     };
+  }, [selectedClient]);
+
+  // Pastikan button modal selalu memiliki focus event handler
+  useEffect(() => {
+    if (selectedClient && modalCloseButtonRef.current) {
+      const closeButton = modalCloseButtonRef.current;
+      closeButton.addEventListener('click', closeModal);
+      
+      return () => {
+        closeButton.removeEventListener('click', closeModal);
+      };
+    }
   }, [selectedClient]);
 
   const handlePointerDown = (e) => {
@@ -48,7 +66,6 @@ const ClientSection = ({ row1, row2 }) => {
 
   const handlePointerMove = (e) => {
     if (!startX) return;
-    
     const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
     if (Math.abs(currentX - startX) > 5) {
       setIsDragging(true);
@@ -63,47 +80,56 @@ const ClientSection = ({ row1, row2 }) => {
     setStartX(0);
   };
 
-  // Clear function to open modal
+  // Fungsi untuk membuka modal
   const openModal = (client) => {
+    if (!client) return;
+    document.body.style.overflow = 'hidden';
     setSelectedClient(client);
   };
 
-  // Clear function to close modal
+  // Fungsi untuk menutup modal - disederhanakan dan diperbaiki
   const closeModal = () => {
+    document.body.style.overflow = 'auto';
     setSelectedClient(null);
   };
-
-  // Handle click outside the modal content
+  
+  // Handle click outside modal
   const handleOutsideClick = (e) => {
-    if (modalRef.current === e.target && !modalContentRef.current.contains(e.target)) {
+    if (modalRef.current && modalRef.current === e.target) {
       closeModal();
     }
   };
-
-  // Simple Modal component
+  
+  // Modal Component
   const Modal = ({ client }) => {
+    if (!client) return null;
+    
     return (
-      <div 
+      <div
         ref={modalRef}
         className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4"
         onClick={handleOutsideClick}
-        role="dialog"
-        aria-modal="true"
       >
-        <div 
+        <div
           ref={modalContentRef}
           className="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 relative shadow-2xl"
+          onClick={(e) => e.stopPropagation()} // Mencegah event bubbling ke parent
         >
-          {/* Close button - simplified and isolated */}
+          {/* Main close button */}
           <button
-            type="button"
+            ref={modalCloseButtonRef}
             onClick={closeModal}
             className="absolute -top-10 right-0 sm:-right-10 p-2 bg-white/20 hover:bg-white/30 rounded-full transition-all duration-300"
             aria-label="Close modal"
+            type="button"
           >
-            <X size={28} className="text-white hover:text-yellow-400 transition-colors" strokeWidth={2.5} />
+            <X
+              size={28}
+              className="text-white hover:text-yellow-400 transition-colors"
+              strokeWidth={2.5}
+            />
           </button>
-          
+
           <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
             <div className="w-full md:w-1/2 flex justify-center">
               <div className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 flex items-center justify-center bg-gray-50 rounded-lg p-4">
@@ -121,12 +147,12 @@ const ClientSection = ({ row1, row2 }) => {
               <p className="text-gray-600 text-sm sm:text-base">
                 {client.description || "No description available"}
               </p>
-              
-              {/* Additional close button for mobile */}
+
+              {/* Mobile close button */}
               <button
-                type="button"
                 onClick={closeModal}
                 className="mt-6 md:hidden w-full py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors flex items-center justify-center gap-2"
+                type="button"
               >
                 <X size={18} />
                 Close
@@ -157,6 +183,7 @@ const ClientSection = ({ row1, row2 }) => {
           src={client.image}
           alt={client.alt}
           className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
+          loading="lazy"
         />
       </div>
     );
@@ -176,7 +203,10 @@ const ClientSection = ({ row1, row2 }) => {
   );
 
   return (
-    <section id="clients" className="min-h-screen bg-beige flex flex-col justify-center py-16 sm:py-20 px-4 sm:px-6">
+    <section
+      id="clients"
+      className="min-h-screen bg-beige flex flex-col justify-center py-16 sm:py-20 px-4 sm:px-6"
+    >
       <div className="container mx-auto">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-16 text-gray-900">
           PROJECT CLIENT KAMI
@@ -186,7 +216,7 @@ const ClientSection = ({ row1, row2 }) => {
           <CarouselRow items={row2} position={position2} />
         </div>
       </div>
-      
+
       {selectedClient && <Modal client={selectedClient} />}
     </section>
   );
