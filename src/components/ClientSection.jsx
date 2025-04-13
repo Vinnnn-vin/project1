@@ -215,7 +215,7 @@ const ClientSection = ({ row1, row2 }) => {
           <CarouselRow items={row1} position={position1} />
           <CarouselRow items={row2} position={position2} />
         </div>
-      </div>
+      </div>x
 
       {selectedClient && <Modal client={selectedClient} />}
     </section>
