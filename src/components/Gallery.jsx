@@ -63,8 +63,8 @@ const Gallery = ({ images }) => {
     <div className="bg-white py-12 sm:py-24" id="gallery">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Judul Section */}
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12">
-          Our Gallery
+        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-black">
+          Hasil Karya Kolaborasi Terbaik Kami!
         </h2>
 
         {/* Grid Gambar */}
