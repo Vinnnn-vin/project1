@@ -14,7 +14,8 @@ const ClientSection = ({ row1, row2 }) => {
   useEffect(() => {
     // Animasi carousel
     const interval = setInterval(() => {
-      if (!isDragging && !selectedClient) { // Hentikan animasi saat modal terbuka
+      if (!isDragging && !selectedClient) {
+        // Hentikan animasi saat modal terbuka
         setPosition1((prev) =>
           Math.abs(prev - 1) >= row1.length * 200 ? 0 : prev - 1
         );
@@ -35,14 +36,14 @@ const ClientSection = ({ row1, row2 }) => {
     };
 
     if (selectedClient) {
-      document.body.style.overflow = 'hidden'; // Mencegah scrolling background
+      document.body.style.overflow = "hidden"; // Mencegah scrolling background
       window.addEventListener("keydown", handleKeyDown);
     } else {
-      document.body.style.overflow = 'auto'; // Mengembalikan scrolling
+      document.body.style.overflow = "auto"; // Mengembalikan scrolling
     }
 
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [selectedClient]);
@@ -51,10 +52,10 @@ const ClientSection = ({ row1, row2 }) => {
   useEffect(() => {
     if (selectedClient && modalCloseButtonRef.current) {
       const closeButton = modalCloseButtonRef.current;
-      closeButton.addEventListener('click', closeModal);
-      
+      closeButton.addEventListener("click", closeModal);
+
       return () => {
-        closeButton.removeEventListener('click', closeModal);
+        closeButton.removeEventListener("click", closeModal);
       };
     }
   }, [selectedClient]);
@@ -83,27 +84,27 @@ const ClientSection = ({ row1, row2 }) => {
   // Fungsi untuk membuka modal
   const openModal = (client) => {
     if (!client) return;
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
     setSelectedClient(client);
   };
 
   // Fungsi untuk menutup modal - disederhanakan dan diperbaiki
   const closeModal = () => {
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = "auto";
     setSelectedClient(null);
   };
-  
+
   // Handle click outside modal
   const handleOutsideClick = (e) => {
     if (modalRef.current && modalRef.current === e.target) {
       closeModal();
     }
   };
-  
+
   // Modal Component
   const Modal = ({ client }) => {
     if (!client) return null;
-    
+
     return (
       <div
         ref={modalRef}
@@ -144,9 +145,17 @@ const ClientSection = ({ row1, row2 }) => {
               <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800">
                 {client.alt}
               </h3>
-              <p className="text-gray-600 text-sm sm:text-base">
+              <a href="http://tiny.cc/adminkosi">
+                <button className="w-full bg-green-600 text-white py-3 px-3 rounded-lg hover:bg-green-600 transition-colors transform hover:scale-105 text-start">
+                  <b>
+                    Bergabung
+                  </b>
+                </button>
+              </a>
+
+              {/* <p className="text-gray-600 text-sm sm:text-base">
                 {client.description || "No description available"}
-              </p>
+              </p> */}
 
               {/* Mobile close button */}
               <button
@@ -215,9 +224,8 @@ const ClientSection = ({ row1, row2 }) => {
           <CarouselRow items={row1} position={position1} />
           <CarouselRow items={row2} position={position2} />
         </div>
-      </div>x
-
-      {selectedClient && <Modal client={selectedClient} />}
+      </div>
+      x{selectedClient && <Modal client={selectedClient} />}
     </section>
   );
 };
