@@ -7,24 +7,27 @@ const ClientSection = ({ row1, row2 }) => {
   const [selectedClient, setSelectedClient] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
+  const animationRef = useRef(null);
   const modalRef = useRef(null);
   const modalContentRef = useRef(null);
   const modalCloseButtonRef = useRef(null);
 
   useEffect(() => {
-    // Animasi carousel
-    const interval = setInterval(() => {
+    const animate = () => {
       if (!isDragging && !selectedClient) {
-        // Hentikan animasi saat modal terbuka
-        setPosition1((prev) =>
-          Math.abs(prev - 1) >= row1.length * 200 ? 0 : prev - 1
-        );
-        setPosition2((prev) =>
-          Math.abs(prev - 1) >= row2.length * 200 ? 0 : prev - 1
-        );
+        setPosition1(prev => (Math.abs(prev - 1) >= row1.length * 200 ? 0 : prev - 1));
+        setPosition2(prev => (Math.abs(prev - 1) >= row2.length * 200 ? 0 : prev - 1));
       }
-    }, 20);
-    return () => clearInterval(interval);
+      animationRef.current = requestAnimationFrame(animate);
+    };
+    
+    animationRef.current = requestAnimationFrame(animate);
+    
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
   }, [row1.length, row2.length, isDragging, selectedClient]);
 
   // Event listener untuk Escape key

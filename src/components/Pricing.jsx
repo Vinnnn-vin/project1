@@ -1,153 +1,166 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
-const Pricing = ({ pricingData }) => {
+const Pricing = () => {
+  const [expandedPack, setExpandedPack] = useState(null);
+
+  const pricingData = [
+    {
+      id: 1,
+      title: "Bronze Package",
+      price: "4.000.000",
+      features: [
+        "15 Photos Feed Instagram",
+        "8 Design Feeds Instagram",
+        "12 Story Instagram",
+        "2 Reels",
+        "Strategi & Perencanaan (analisa + konsep & ide + monthly report & evaluasi)",
+        "Scriptwriting",
+        "Copywriting Instagram",
+        "Admin Instagram (reply DM, comment, upload video)",
+        "Instagram Ads",
+        "Photographer & Editor",
+        "Visit 1-2x sebulan"
+      ],
+      badge: "bronze.png"
+    },
+    {
+      id: 2,
+      title: "Silver Package",
+      price: "5.000.000",
+      features: [
+        "12 Konten TikTok Mirroring ke reels",
+        "Strategi Perencanaan (analisa + konsep & ide + monthly report & evaluasi)",
+        "Scriptwriting",
+        "Copywriting TikTok & Instagram",
+        "Admin TikTok & Instagram (reply DM, comment, upload video)",
+        "TikTok & Instagram Ads",
+        "Videographer & Editor",
+        "Visit 2-4x sebulan"
+      ],
+      badge: "silver.png"
+    },
+    {
+      id: 3,
+      title: "Gold Package",
+      price: "7.000.000",
+      features: [
+        "15 Konten TikTok Mirroring ke Reels",
+        "8 Design Feeds Instagram",
+        "8 High Quality Photos",
+        "8 Story Instagram",
+        "Strategi & Perencanaan (analisa + konsep & ide + monthly report & evaluasi)",
+        "Scriptwriting",
+        "Copywriting TikTok & Instagram",
+        "Admin TikTok & Instagram (reply DM, comment, upload video)",
+        "TikTok Ads",
+        "Videographer & Editor",
+        "Visit 1-2x sebulan"
+      ],
+      badge: "gold.png"
+    },
+    {
+      id: 4,
+      title: "Paket Live Shopping",
+      price: "5.500.000",
+      features: [
+        "12 Konten Video Awareness",
+        "24 Konten Pre-heat Live",
+        "Live 72 jam (Senin-Sabtu dengan durasi 3 jam per live)",
+        "Ada 50rb per live (total 24x)",
+        "Host Live",
+        "Studio + Perlengkapan + Properti",
+        "Scriptwriting TikTok",
+        "Copywriting TikTok",
+        "Admin TikTok (reply DM, comment, upload video)",
+        "Videographer & Editor",
+        "Studio & Perlengkapan"
+      ],
+      badge: "best-offer-badge-a4e224.webp"
+    }
+  ];
+
+  const toggleExpand = (id) => {
+    setExpandedPack(expandedPack === id ? null : id);
+  };
+
   return (
-    // <div id="pricing" className="w-full py-16 bg-gray-100">
-    //   <div className="text-3xl sm:text-4xl font-bold text-center mb-16 text-black">
-    //     <h2>Layanan Kami</h2>
-    //   </div>
-    //   <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
-    //     {pricingData.map((pack, index) => (
-    //       <div key={index} className="relative bg-white rounded-t-2xl overflow shadow-lg flex flex-col h-full">
-    //         {pack.title === "Bronze Package" && (
-    //           <div className="absolute -top-12 right-14 mr-14 pr-14 transform -rotate-12 z-10">
-    //             <img src="/images/bronze.png" alt="Bronze Badge" className="w-20 h-20" />
-    //           </div>
-    //         )}
-    //         {pack.title === "Silver Package" && (
-    //           <div className="absolute -top-12 right-14 mr-14 pr-14 transform -rotate-12 z-10">
-    //             <img src="/images/silver.png" alt="Silver Badge" className="w-20 h-20" />
-    //           </div>
-    //         )}
-    //         {pack.title === "Gold Package" && (
-    //           <div className="absolute -top-12 right-14 mr-14 pr-14 transform -rotate-12 z-10">
-    //             <img src="/images/gold.png" alt="Gold Badge" className="w-20 h-20" />
-    //           </div>
-    //         )}
-    //         {pack.title === "Paket Live Shopping" && (
-    //           <div className="absolute top-12 right-14 mr-14 pr-14 transform -rotate-12 z-10">
-    //             <img src="/images/best-offer-badge-a4e224.webp" alt="Best Offer Badge" className="w-20 h-20" />
-    //           </div>
-    //         )}
-    //         <div className="p-6 bg-[#F5F5DC] flex-grow flex flex-col">
-    //           <div className="text-center mt-10 mb-6">
-    //             <span className="text-sm text-black"><b>Rp </b></span>
-    //             <span className="text-4xl font-bold text-gray-800">{pack.price}</span>
-    //             <span className="text-sm text-gray-600 ml-1">/ Bulan</span>
-    //           </div>
-    //           <ul className="space-y-4 flex-grow">
-    //             {pack.features.map((feature, idx) => (
-    //               <li key={idx} className="flex items-start gap-2 text-gray-700">
-    //                 <div className="min-w-4 h-4 mt-1 bg-green-500 rounded-full"></div>
-    //                 <span className="text-sm">{feature}</span>
-    //               </li>
-    //             ))}
-    //           </ul>
-    //           <button className="w-full bg-green-500 text-white py-3 rounded-lg mt-8 hover:bg-green-600 transition-colors">
-    //             <a href="http://tiny.cc/adminkosi">Pesan Sekarang</a>
-    //           </button>
     <div id="pricing" className="w-full py-12 sm:py-16 bg-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Judul Section */}
-        <div className="text-center mb-8 sm:mb-12 mt-12">
+        <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-black">
             LAYANAN KAMI
           </h2>
-          <h3 className="text-black"> Kami menyediakan berbagai paket sesuai kebutuhan anda</h3>
+          <p className="text-lg text-gray-600 mt-2">
+            Kami menyediakan berbagai paket sesuai kebutuhan anda
+          </p>
         </div>
 
-        {/* Grid Card Pricing */}
-        <div className="grid grid-cols-1 mt-15 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {pricingData.map((pack, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {pricingData.map((pack) => (
             <div
-              key={index}
-              className="relative bg-[#F5F5DC] rounded-2xl overflow shadow-lg hover:shadow-xl transition-shadow duration-300 mt-20"
+              key={pack.id}
+              className={`bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 ${
+                expandedPack === pack.id ? 'ring-2 ring-yellow-400' : ''
+              }`}
             >
-              {/* Badge */}
-              {/* {pack.title === "Bronze Package" && (
-                <div className="absolute -top-8 right-8 transform -rotate-12 z-10">
-                  <img
-                    src="/images/bronze.png"
-                    alt="Bronze Badge"
-                    className="w-20 h-20"
-                  />
+              <div 
+                className="p-6 cursor-pointer flex justify-between items-center"
+                onClick={() => toggleExpand(pack.id)}
+              >
+                <div>
+                  <div className="flex items-center gap-3">
+                    {pack.badge && (
+                      <img 
+                        src={`/images/${pack.badge}`} 
+                        alt={pack.title} 
+                        className="w-12 h-12 object-contain"
+                      />
+                    )}
+                    <h3 className="text-xl font-bold text-gray-800">
+                      {pack.title}
+                    </h3>
+                  </div>
+                  <p className="text-lg font-semibold text-gray-700 mt-1">
+                    Rp {pack.price} <span className="text-sm text-gray-500">/ Bulan</span>
+                  </p>
                 </div>
-              )}
-              {pack.title === "Silver Package" && (
-                <div className="absolute -top-8 right-8 transform -rotate-12 z-10">
-                  <img
-                    src="/images/silver.png"
-                    alt="Silver Badge"
-                    className="w-16 h-16"
-                  />
+                <div className="text-gray-500">
+                  {expandedPack === pack.id ? <FiChevronUp size={24} /> : <FiChevronDown size={24} />}
                 </div>
-              )}
-              {pack.title === "Gold Package" && (
-                <div className="absolute -top-8 right-8 transform -rotate-12 z-10">
-                  <img
-                    src="/images/gold.png"
-                    alt="Gold Badge"
-                    className="w-16 h-16"
-                  />
-                </div>
-              )}
-              {pack.title === "Paket Live Shopping" && (
-                <div className="absolute -top-8 right-8 transform -rotate-12 z-10">
-                  <img
-                    src="/images/best-offer-badge-a4e224.webp"
-                    alt="Best Offer Badge"
-                    className="w-16 h-16"
-                  />
-                </div>
-              )} */}  
-
-            {pack.title === "Bronze Package" && (
-              <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 -rotate-12 z-10">
-                <img src="/images/bronze.png" alt="Bronze Badge" className="w-20 h-20" />
               </div>
-            )}
-            {pack.title === "Silver Package" && (
-              <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 -rotate-12 z-10">
-                <img src="/images/silver.png" alt="Silver Badge" className="w-20 h-20" />
-              </div>
-            )}
-            {pack.title === "Gold Package" && (
-              <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 -rotate-12 z-10">
-                <img src="/images/gold.png" alt="Gold Badge" className="w-20 h-20" />
-              </div>
-            )}
-            {pack.title === "Paket Live Shopping" && (
-              <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 -rotate-12 z-10">
-                <img src="/images/best-offer-badge-a4e224.webp" alt="Best Offer Badge" className="w-20 h-20" />
-              </div>
-            )}
 
-              {/* Konten Card */}
-              <div className="p-6 bg-[#F5F5DC] flex flex-col h-full mt-10">
-                {/* Harga */}
-                <div className="text-center mt-0 mb-6">
-                <h2 className='text-center mb-6 text-black'>{pack.title}</h2>
-                  <span className="text-sm text-black"><b>Rp</b></span>
-                  <span className="text-3xl sm:text-4xl font-bold text-gray-800">
-                    {pack.price}
-                  </span>
-                  <span className="text-sm text-gray-600 ml-1">/ Bulan</span>
+              <div 
+                className={`transition-all duration-300 overflow-hidden ${
+                  expandedPack === pack.id ? 'max-h-[1000px]' : 'max-h-0'
+                }`}
+              >
+                <div className="px-6 pb-6">
+                  <ul className="space-y-3">
+                    {pack.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start">
+                        <svg
+                          className="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                        <span className="text-gray-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <button className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-300">
+                    Pesan Sekarang
+                  </button>
                 </div>
-
-                {/* Fitur */}
-                <ul className="space-y-4 flex-grow">
-                  {pack.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-gray-700">
-                      <div className="min-w-4 h-4 mt-1 bg-green-500 rounded-full"></div>
-                      <span className="text-sm sm:text-base">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Tombol */}
-                <button className="w-full bg-green-500 text-white py-3 rounded-lg mt-8 hover:bg-green-600 transition-colors transform hover:scale-105">
-                  <a href="http://tiny.cc/adminkosi">Pesan Sekarang</a>
-                </button>
               </div>
             </div>
           ))}

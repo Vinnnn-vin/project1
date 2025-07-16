@@ -24,3 +24,11 @@
 .delay-300 {
   animation-delay: 0.3s;
 }
+
+.hamburger-line {
+  transition: all 0.3s ease;
+}
+
+.mobile-menu {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
