@@ -1,6 +1,6 @@
 import React from "react";
 
-const Banner = ({ sections, sectionNames, activeSection, scrollToSection }) => {
+const Banner = () => {
   return (
     <div
       className="relative h-screen bg-cover bg-center"
@@ -23,6 +23,14 @@ const Banner = ({ sections, sectionNames, activeSection, scrollToSection }) => {
               Konsultasi Gratis Sekarang!
             </a>
           </button>
+        </div>
+        <div className="w-full md:w-1/2 flex justify-center">
+          <img 
+            src="/images/banner.jpg" 
+            alt="Brand Identity" 
+            className="max-w-full h-auto rounded-lg shadow-xl"
+            style={{ maxHeight: "60vh" }}
+          />
         </div>
       </div>
     </div>
