@@ -84,27 +84,23 @@ const ClientSection = ({ row1, row2 }) => {
     setStartX(0);
   };
 
-  // Fungsi untuk membuka modal
   const openModal = (client) => {
     if (!client) return;
     document.body.style.overflow = "hidden";
     setSelectedClient(client);
   };
 
-  // Fungsi untuk menutup modal - disederhanakan dan diperbaiki
   const closeModal = () => {
     document.body.style.overflow = "auto";
     setSelectedClient(null);
   };
 
-  // Handle click outside modal
   const handleOutsideClick = (e) => {
     if (modalRef.current && modalRef.current === e.target) {
       closeModal();
     }
   };
 
-  // Modal Component
   const Modal = ({ client }) => {
     if (!client) return null;
 
@@ -117,9 +113,8 @@ const ClientSection = ({ row1, row2 }) => {
         <div
           ref={modalContentRef}
           className="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 relative shadow-2xl"
-          onClick={(e) => e.stopPropagation()} // Mencegah event bubbling ke parent
+          onClick={(e) => e.stopPropagation()}
         >
-          {/* Main close button */}
           <button
             ref={modalCloseButtonRef}
             onClick={closeModal}
@@ -155,12 +150,6 @@ const ClientSection = ({ row1, row2 }) => {
                   </b>
                 </button>
               </a>
-
-              {/* <p className="text-gray-600 text-sm sm:text-base">
-                {client.description || "No description available"}
-              </p> */}
-
-              {/* Mobile close button */}
               <button
                 onClick={closeModal}
                 className="mt-6 md:hidden w-full py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors flex items-center justify-center gap-2"

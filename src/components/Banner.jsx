@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 
 const Banner = () => {
   return (
@@ -21,7 +21,7 @@ const Banner = () => {
           We help businesses grow through strategic social media branding
         </p>
         <button className="bg-green-500 text-black px-8 py-3 rounded-full font-bold hover:bg-green-600 transition-all transform hover:scale-105">
-          <a href="https://api.whatsapp.com/send/?phone=62881037767536&text&type=phone_number&app_absent=0wa.me/+62881037767536">
+          <a href="https://wa.me/62881037767536?text=Hai%20Min%2C%20Mau%20tanya%20info%20....">
             Konsultasi Gratis Sekarang!
           </a>
         </button>
