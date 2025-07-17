@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const BackToTop = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -52,3 +52,4 @@ const BackToTop = () => {
 };
 
 export default BackToTop;
+

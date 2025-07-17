@@ -1,10 +1,24 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 const Gallery = ({ images }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const modalRef = useRef(null);
   
-  // Handle keyboard navigation
+  const nextImage = useCallback(() => {
+    if (!selectedImage) return;
+    const currentIndex = images.findIndex(img => img.id === selectedImage.id);
+    const nextIndex = (currentIndex + 1) % images.length;
+    setSelectedImage(images[nextIndex]);
+  }, [images, selectedImage]);
+
+  const previousImage = useCallback(() => {
+    if (!selectedImage) return;
+    const currentIndex = images.findIndex(img => img.id === selectedImage.id);
+    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+    setSelectedImage(images[prevIndex]);
+  }, [images, selectedImage]);
+
   const handleKeyDown = useCallback((e) => {
     if (!selectedImage) return;
     
@@ -21,37 +35,28 @@ const Gallery = ({ images }) => {
       default:
         break;
     }
-  }, [selectedImage]);
+  }, [selectedImage, nextImage, previousImage]);
 
-  // Image navigation
-  const nextImage = () => {
-    const currentIndex = images.findIndex(img => img.id === selectedImage.id);
-    const nextIndex = (currentIndex + 1) % images.length;
-    setSelectedImage(images[nextIndex]);
-  };
-
-  const previousImage = () => {
-    const currentIndex = images.findIndex(img => img.id === selectedImage.id);
-    const prevIndex = (currentIndex - 1 + images.length) % images.length;
-    setSelectedImage(images[prevIndex]);
-  };
-
-  // Close modal when clicking outside
   const handleBackdropClick = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
       setSelectedImage(null);
     }
   };
 
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
   return (
     <div className="bg-white py-12" id="gallery">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Title */}
         <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-black">
           Hasil Karya Kolaborasi Terbaik Kami
         </h2>
 
-        {/* Grid with smaller thumbnails */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
           {images.map((image) => (
             <div
@@ -73,14 +78,12 @@ const Gallery = ({ images }) => {
                 </button>
               </div>
               
-              {/* Pinned badge */}
               {image.pinned && (
                 <div className="absolute top-2 left-2 bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded">
                   Pinned
                 </div>
               )}
-              
-              {/* View count */}
+
               {image.views && (
                 <div className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
                   {image.views.toLocaleString()} views
@@ -91,7 +94,6 @@ const Gallery = ({ images }) => {
         </div>
       </div>
 
-      {/* Modal - Improved design */}
       {selectedImage && (
         <div 
           className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
@@ -101,7 +103,6 @@ const Gallery = ({ images }) => {
             ref={modalRef}
             className="relative w-full max-w-4xl bg-white rounded-lg overflow-hidden shadow-2xl"
           >
-            {/* Close button */}
             <button
               onClick={() => setSelectedImage(null)}
               className="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 p-2 rounded-full text-white transition-colors"
@@ -112,7 +113,6 @@ const Gallery = ({ images }) => {
               </svg>
             </button>
 
-            {/* Image */}
             <div className="relative aspect-video bg-black">
               <img
                 src={selectedImage.src}
@@ -121,7 +121,6 @@ const Gallery = ({ images }) => {
               />
             </div>
 
-            {/* Image info */}
             <div className="p-4 bg-white">
               <h3 className="text-lg font-bold text-gray-900">{selectedImage.title || selectedImage.alt}</h3>
               {selectedImage.views && (
@@ -134,7 +133,6 @@ const Gallery = ({ images }) => {
               )}
             </div>
 
-            {/* Navigation buttons */}
             <button
               onClick={(e) => { e.stopPropagation(); previousImage(); }}
               className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/30 p-3 rounded-full text-white transition-colors"
@@ -154,7 +152,6 @@ const Gallery = ({ images }) => {
               </svg>
             </button>
 
-            {/* Image counter */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
               {images.findIndex(img => img.id === selectedImage.id) + 1} / {images.length}
             </div>
@@ -163,6 +160,20 @@ const Gallery = ({ images }) => {
       )}
     </div>
   );
+};
+
+Gallery.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      src: PropTypes.string.isRequired,
+      alt: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      description: PropTypes.string,
+      views: PropTypes.number,
+      pinned: PropTypes.bool,
+    })
+  ).isRequired,
 };
 
 export default Gallery;

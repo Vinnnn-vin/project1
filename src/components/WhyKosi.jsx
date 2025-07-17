@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
 const WhyKosi = ({ socialIcons }) => {
   return (
@@ -45,3 +45,7 @@ const WhyKosi = ({ socialIcons }) => {
 };
 
 export default WhyKosi;
+
+WhyKosi.propTypes = {
+  socialIcons: PropTypes.arrayOf().isRequired,
+};

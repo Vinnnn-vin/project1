@@ -1,5 +1,3 @@
-// import React from "react";
-
 const Footer = () => {
   const scrollToSection = (id) => {
     document.getElementById(id.toLowerCase())?.scrollIntoView({

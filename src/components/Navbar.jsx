@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const Navbar = ({ sections, sectionNames, activeSection, scrollToSection }) => {
+const Navbar = ({ sections, sectionNames, activeSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -21,7 +21,6 @@ const Navbar = ({ sections, sectionNames, activeSection, scrollToSection }) => {
   const handleNavigation = (section) => {
     const element = document.getElementById(section);
     if (element) {
-      // Calculate the position to scroll to, accounting for navbar height
       const navbarHeight = document.querySelector('nav')?.offsetHeight || 0;
       const offsetPosition = element.offsetTop - navbarHeight;
       
@@ -44,7 +43,6 @@ const Navbar = ({ sections, sectionNames, activeSection, scrollToSection }) => {
           />
         </div>
 
-        {/* Hamburger Menu (Mobile) */}
         <div className="md:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -57,7 +55,6 @@ const Navbar = ({ sections, sectionNames, activeSection, scrollToSection }) => {
           </button>
         </div>
 
-        {/* Navigation Menu */}
         <div
           className={`fixed md:static top-0 left-0 w-full h-screen md:h-auto bg-black md:bg-transparent transition-all duration-300 ease-in-out flex items-center justify-center md:block ${
             isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible md:visible md:opacity-100'

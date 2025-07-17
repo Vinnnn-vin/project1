@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { useState } from "react";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 const Pricing = () => {
   const [expandedPack, setExpandedPack] = useState(null);
@@ -21,9 +20,9 @@ const Pricing = () => {
         "Admin Instagram (reply DM, comment, upload video)",
         "Instagram Ads",
         "Photographer & Editor",
-        "Visit 1-2x sebulan"
+        "Visit 1-2x sebulan",
       ],
-      badge: "bronze.png"
+      badge: "bronze.png",
     },
     {
       id: 2,
@@ -37,9 +36,9 @@ const Pricing = () => {
         "Admin TikTok & Instagram (reply DM, comment, upload video)",
         "TikTok & Instagram Ads",
         "Videographer & Editor",
-        "Visit 2-4x sebulan"
+        "Visit 2-4x sebulan",
       ],
-      badge: "silver.png"
+      badge: "silver.png",
     },
     {
       id: 3,
@@ -56,9 +55,9 @@ const Pricing = () => {
         "Admin TikTok & Instagram (reply DM, comment, upload video)",
         "TikTok Ads",
         "Videographer & Editor",
-        "Visit 1-2x sebulan"
+        "Visit 1-2x sebulan",
       ],
-      badge: "gold.png"
+      badge: "gold.png",
     },
     {
       id: 4,
@@ -75,14 +74,19 @@ const Pricing = () => {
         "Copywriting TikTok",
         "Admin TikTok (reply DM, comment, upload video)",
         "Videographer & Editor",
-        "Studio & Perlengkapan"
+        "Studio & Perlengkapan",
       ],
-      badge: "best-offer-badge-a4e224.webp"
-    }
+      badge: "best-offer-badge-a4e224.webp",
+    },
   ];
 
   const toggleExpand = (id) => {
     setExpandedPack(expandedPack === id ? null : id);
+  };
+
+  const getWhatsAppLink = (packageTitle) => {
+    const message = `Halo Admin KOSI, saya tertarik dengan ${encodeURIComponent(packageTitle)}. Bisa minta info lebih lanjut?`;
+    return `https://wa.me/62881037767536?text=${message}`;
   };
 
   return (
@@ -102,19 +106,19 @@ const Pricing = () => {
             <div
               key={pack.id}
               className={`bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 ${
-                expandedPack === pack.id ? 'ring-2 ring-yellow-400' : ''
+                expandedPack === pack.id ? "ring-2 ring-yellow-400" : ""
               }`}
             >
-              <div 
+              <div
                 className="p-6 cursor-pointer flex justify-between items-center"
                 onClick={() => toggleExpand(pack.id)}
               >
                 <div>
                   <div className="flex items-center gap-3">
                     {pack.badge && (
-                      <img 
-                        src={`/images/${pack.badge}`} 
-                        alt={pack.title} 
+                      <img
+                        src={`/images/${pack.badge}`}
+                        alt={pack.title}
                         className="w-12 h-12 object-contain"
                       />
                     )}
@@ -123,17 +127,22 @@ const Pricing = () => {
                     </h3>
                   </div>
                   <p className="text-lg font-semibold text-gray-700 mt-1">
-                    Rp {pack.price} <span className="text-sm text-gray-500">/ Bulan</span>
+                    Rp {pack.price}{" "}
+                    <span className="text-sm text-gray-500">/ Bulan</span>
                   </p>
                 </div>
                 <div className="text-gray-500">
-                  {expandedPack === pack.id ? <FiChevronUp size={24} /> : <FiChevronDown size={24} />}
+                  {expandedPack === pack.id ? (
+                    <FiChevronUp size={24} />
+                  ) : (
+                    <FiChevronDown size={24} />
+                  )}
                 </div>
               </div>
 
-              <div 
+              <div
                 className={`transition-all duration-300 overflow-hidden ${
-                  expandedPack === pack.id ? 'max-h-[1000px]' : 'max-h-0'
+                  expandedPack === pack.id ? "max-h-[1000px]" : "max-h-0"
                 }`}
               >
                 <div className="px-6 pb-6">
@@ -157,9 +166,15 @@ const Pricing = () => {
                       </li>
                     ))}
                   </ul>
-                  <button className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-300">
-                    Pesan Sekarang
-                  </button>
+                  <a 
+                    href={getWhatsAppLink(pack.title)} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    <button className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-300">
+                      Pesan Sekarang
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>

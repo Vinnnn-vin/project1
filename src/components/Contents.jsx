@@ -1,29 +1,31 @@
-// import React from 'react';
-import { motion } from 'framer-motion';
-import AnimatedCounter from './AnimatedCounter';
-import PropTypes from 'prop-types';
+import { motion } from "framer-motion";
+import AnimatedCounter from "./AnimatedCounter";
+import PropTypes from "prop-types";
 
 const Contents = ({ title, dataItems }) => {
-  // Kelompokkan dataItems menjadi chunk berisi 3 item per baris
   const chunkedItems = [];
   for (let i = 0; i < dataItems.length; i += 3) {
     chunkedItems.push(dataItems.slice(i, i + 3));
   }
 
   return (
-    <div id="contents" className="flex flex-col justify-center py-12 bg-[#ECEBD3] pt-24 min-h-screen">
+    <div
+      id="contents"
+      className="flex flex-col justify-center py-12 bg-[#ECEBD3] pt-24 min-h-screen"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Judul Section */}
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black">
             {title}
           </h1>
         </div>
 
-        {/* Grid Items - 3 per baris */}
         <div className="flex flex-col gap-8">
           {chunkedItems.map((row, rowIndex) => (
-            <div key={`row-${rowIndex}`} className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div
+              key={`row-${rowIndex}`}
+              className="grid grid-cols-1 sm:grid-cols-3 gap-8"
+            >
               {row.map((item, index) => (
                 <motion.div
                   key={index}
@@ -33,7 +35,6 @@ const Contents = ({ title, dataItems }) => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  {/* Icon */}
                   <div className="flex-shrink-0">
                     <img
                       src="/images/chart.png"
@@ -42,7 +43,6 @@ const Contents = ({ title, dataItems }) => {
                     />
                   </div>
 
-                  {/* Konten */}
                   <div className="ml-5">
                     <h2 className="text-xl font-bold text-black mb-2">
                       {item.title}
@@ -71,9 +71,9 @@ Contents.propTypes = {
   dataItems: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      value: PropTypes.number.isRequired
+      value: PropTypes.number.isRequired,
     })
-  ).isRequired
+  ).isRequired,
 };
 
 export default Contents;

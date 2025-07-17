@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
+import { useState, useEffect, useRef } from "react";
 import { X } from "react-feather";
 
 const ClientSection = ({ row1, row2 }) => {
@@ -223,3 +224,45 @@ const ClientSection = ({ row1, row2 }) => {
 };
 
 export default ClientSection;
+
+ClientSection.propTypes = {
+  row1: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      image: PropTypes.string.isRequired,
+      alt: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      description: PropTypes.string,
+      link: PropTypes.string,
+      views: PropTypes.number,
+      pinned: PropTypes.bool,
+    })
+  ).isRequired,
+  row2: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      image: PropTypes.string.isRequired,
+      alt: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      description: PropTypes.string,
+      link: PropTypes.string,
+      views: PropTypes.number,
+      pinned: PropTypes.bool,
+    })
+  ).isRequired,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      image: PropTypes.string.isRequired,
+      alt: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  position: PropTypes.number.isRequired,
+  client: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    image: PropTypes.string.isRequired,
+    alt: PropTypes.string.isRequired,
+  }).isRequired,
+};

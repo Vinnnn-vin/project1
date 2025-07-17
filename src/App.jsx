@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Banner from "./components/Banner";
 import Contents from "./components/Contents";
@@ -12,7 +12,7 @@ import BackToTop from "./components/BackToTop";
 import "./App.css";
 
 function App() {
-  const [activeSection, setActiveSection] = useState("");
+  const [activeSection] = useState("");
 
   const sections = ["contents", "services", "pricing", "gallery"];
   const sectionNames = [

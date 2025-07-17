@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import {useState, useEffect}  from 'react';
 
 const AnimatedCounter = ({ value }) => {
   const [count, setCount] = useState(0);
@@ -20,3 +21,7 @@ const AnimatedCounter = ({ value }) => {
 };
 
 export default AnimatedCounter;
+
+AnimatedCounter.propTypes = {
+  value: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
